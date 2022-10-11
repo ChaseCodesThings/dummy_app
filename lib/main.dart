@@ -14,7 +14,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Changeable Blue and Red Button"),),
+        title: Text("Changeable Blue Button"),),
         body: Column(
           children: [
             Container(
