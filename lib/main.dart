@@ -1,50 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:translator/translator.dart';
 
-void main(){
-  runApp(MyApp());
-}
+void main() => runApp(MaterialApp(
+    home: MyApp(),
+    debugShowCheckedModeBanner: false,
+));
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
 class _MyAppState extends State<MyApp> {
-  bool pressOn = true;
-  bool pressOff = true;
+  GoogleTranslator translator = new GoogleTranslator();
+  String out = "";
+  final language = TextEditingController();
+
+  void translate()
+  {
+    translator.translate(language.text, to: "es").then((output) {
+      setState(() {
+        out = output.toString();
+      });
+      print(out);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Changeable Red Button"),),
-        body: Column(
-          children: [
-            Container(
-              height: 0.0,
-              width: 100.0,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: pressOn ? Colors.red : Colors.blue,
-                    fixedSize: const Size(250, 50),
-                    textStyle: const TextStyle(
-                      fontSize: 25,
-                    )
-                ),
-                child: pressOn ? Text("Make me blue!") : Text("Make me red!"),
-                onPressed: (){
-                  setState(() {
-                    pressOn = !pressOn;
-                    pressOff = !pressOff;
-                  });
+        title: const Text("Language Translation Prototype"),
+      ),
+      body: Container(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 125, width: 70,),
+              TextField(
+                controller: language,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  translate();
                 },
+                child: Text("Translate to Spanish",
+                style: TextStyle(
+                  fontSize: 27,
+                ),
+                ),
               ),
-            ),
-            Container(
-              height: 100.0,
-              width: 100.0,
-              child: Image(
-                image: NetworkImage('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fillustrations%2Fspanish-flags-cartoon&psig=AOvVaw1Hu621_ozgkM2RMQWy_ZUA&ust=1665579647751000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCOj1s-yd2PoCFQAAAAAdAAAAABAz'),
+              SizedBox(height: 125, width: 70,
               ),
-            ),
-          ],
-        ));
+              Text(out,
+                style: TextStyle(
+                  fontSize: 30,
+                ),
+              ),
+            ],
+          ),
+        )
+      ),
+    );
   }
 }
