@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
              // ),
               Text(out,
                 style: TextStyle(
-                  fontSize: 45,
+                  fontSize: 38,
                 ),
               ),
             ],
