@@ -13,7 +13,7 @@ class _MyAppState extends State<MyApp> {
   GoogleTranslator translator = new GoogleTranslator();
   String out = "";
   final language = TextEditingController();
-
+// testing changes to file for git
   void translate()
   {
     translator.translate(language.text, to: "es").then((output) {
