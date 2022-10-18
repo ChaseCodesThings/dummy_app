@@ -10,7 +10,7 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 class _MyAppState extends State<MyApp> {
-  GoogleTranslator translator = new GoogleTranslator();
+  GoogleTranslator translator = GoogleTranslator();
   String out = "";
   final language = TextEditingController();
 
@@ -48,11 +48,11 @@ class _MyAppState extends State<MyApp> {
                 ),
                 ),
               ),
-              SizedBox(height: 125, width: 70,
-              ),
+              //SizedBox(height: 125, width: 70,
+             // ),
               Text(out,
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 45,
                 ),
               ),
             ],
