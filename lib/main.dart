@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:translator/translator.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 void main() => runApp(MaterialApp(
     home: MyApp(),
@@ -11,9 +12,9 @@ class MyApp extends StatefulWidget {
 }
 class _MyAppState extends State<MyApp> {
   GoogleTranslator translator = GoogleTranslator();
+  FlutterTts flutterTts = FlutterTts();
   String out = "";
   final language = TextEditingController();
-// testing changes to file for git
   void translate()
   {
     translator.translate(language.text, to: "es").then((output) {
@@ -23,6 +24,7 @@ class _MyAppState extends State<MyApp> {
       print(out);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +38,9 @@ class _MyAppState extends State<MyApp> {
               SizedBox(
                 height: 125, width: 70,),
               TextField(
+                style: TextStyle(
+                  fontSize: 30,
+                ),
                 controller: language,
               ),
               ElevatedButton(
@@ -48,8 +53,19 @@ class _MyAppState extends State<MyApp> {
                 ),
                 ),
               ),
-              //SizedBox(height: 125, width: 70,
-             // ),
+              ElevatedButton(
+                onPressed: () {
+                  flutterTts.setLanguage("es");
+                  flutterTts.setSpeechRate(0.4);
+                  flutterTts.setPitch(1.0);
+                  flutterTts.speak(out);
+                },
+                child: Text("Say in Spanish",
+                  style: TextStyle(
+                    fontSize: 27,
+                  ),
+                ),
+              ),
               Text(out,
                 style: TextStyle(
                   fontSize: 38,
