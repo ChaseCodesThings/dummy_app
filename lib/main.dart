@@ -3,8 +3,8 @@ import 'package:translator/translator.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 void main() => runApp(MaterialApp(
-    home: MyApp(),
-    debugShowCheckedModeBanner: false,
+  home: MyApp(),
+  debugShowCheckedModeBanner: false,
 ));
 class MyApp extends StatefulWidget {
   @override
@@ -24,7 +24,13 @@ class _MyAppState extends State<MyApp> {
       print(out);
     });
   }
-
+  void sayit()
+  {
+    flutterTts.setLanguage("es");
+    flutterTts.setSpeechRate(0.4);
+    flutterTts.setPitch(1.0);
+    flutterTts.speak(out);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,48 +38,45 @@ class _MyAppState extends State<MyApp> {
         title: const Text("Language Translation Prototype"),
       ),
       body: Container(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 125, width: 70,),
-              TextField(
-                style: TextStyle(
-                  fontSize: 30,
-                ),
-                controller: language,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  translate();
-                },
-                child: Text("Translate to Spanish",
-                style: TextStyle(
-                  fontSize: 27,
-                ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  flutterTts.setLanguage("es");
-                  flutterTts.setSpeechRate(0.4);
-                  flutterTts.setPitch(1.0);
-                  flutterTts.speak(out);
-                },
-                child: Text("Say in Spanish",
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 125, width: 70,),
+                TextField(
                   style: TextStyle(
-                    fontSize: 27,
+                    fontSize: 30,
+                  ),
+                  controller: language,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    translate();
+                  },
+                  child: Text("Translate to Spanish",
+                    style: TextStyle(
+                      fontSize: 27,
+                    ),
                   ),
                 ),
-              ),
-              Text(out,
-                style: TextStyle(
-                  fontSize: 38,
+                ElevatedButton(
+                  onPressed: () {
+                    sayit();
+                  },
+                  child: Text("Say in Spanish",
+                    style: TextStyle(
+                      fontSize: 27,
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        )
+                Text(out,
+                  style: TextStyle(
+                    fontSize: 38,
+                  ),
+                ),
+              ],
+            ),
+          )
       ),
     );
   }
