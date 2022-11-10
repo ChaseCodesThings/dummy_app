@@ -1,6 +1,8 @@
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'mytranslator.dart';
+import 'package:dummy_app/vocab.dart';
+import 'package:dummy_app/database_ui.dart';
 
 void main(){
   runApp(MyApp());
@@ -42,12 +44,19 @@ class _MyAppState extends State<MyApp> {
                   color: Colors.blue,
                 child: const Text("Welcome to my App Prototype",
                   style: TextStyle(fontSize: 35),
-
                 )
               ),
               Container(
                 color: Colors.white,
                 child: Translate()
+              ),
+              Container(
+                  color: Colors.purple,
+                  child: Vocab()
+              ),
+              Container(
+                  color: Colors.blueGrey,
+                  child: Data()
               ),
             ],
           ),
@@ -61,6 +70,8 @@ class _MyAppState extends State<MyApp> {
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(icon: Icon(Icons.home), title: Text("Home")),
             BottomNavyBarItem(icon: Icon(Icons.language), title: Text("Translation")),
+            BottomNavyBarItem(icon: Icon(Icons.workspace_premium_outlined), title: Text("VocabUlary")),
+            BottomNavyBarItem(icon: Icon(Icons.dataset_rounded), title: Text("Database")),
           ],
         ),
       ),
