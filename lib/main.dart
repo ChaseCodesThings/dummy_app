@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: BottomNavyBar(
           onItemSelected: (index){
             setState(() {
-              pageController.jumpToPage(index);
+              pageController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeInOutCirc);
             });
           },
           items: <BottomNavyBarItem>[

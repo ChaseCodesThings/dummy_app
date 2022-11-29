@@ -5,6 +5,7 @@ class Data extends StatefulWidget {
   _DataState createState() => _DataState();
 }
 class _DataState extends State<Data>{
+  final datab = TextEditingController();
   @override
   Widget build(BuildContext) {
     return Scaffold(
@@ -13,6 +14,13 @@ class _DataState extends State<Data>{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            TextField(
+              style: TextStyle(
+                fontSize: 30,
+              ),
+              controller: datab
+            ),
+
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.red,
@@ -20,7 +28,7 @@ class _DataState extends State<Data>{
               ),
               onPressed: () async{
                 int i = await DatabaseHelper.instance.insert({
-                  DatabaseHelper.columnName : 'Chase'
+                  DatabaseHelper.columnName : datab.text
                 });
                 print("the inserted id is $i");
               },
@@ -57,7 +65,8 @@ class _DataState extends State<Data>{
                 foregroundColor: Colors.white,
               ),
               onPressed: () async{
-                int rowsEffected = await DatabaseHelper.instance.delete(14);
+                //String data//
+                int rowsEffected = await DatabaseHelper.instance.delete(12);
                 print(rowsEffected);
               },
               child: Text("delete"),

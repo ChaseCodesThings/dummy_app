@@ -41,6 +41,7 @@ dependencies:
   bottom_navy_bar: ^6.0.0
   sqflite:
   path_provider:
+  get:
 
 dev_dependencies:
   flutter_test:
