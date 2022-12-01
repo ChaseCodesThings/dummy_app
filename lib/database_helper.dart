@@ -5,7 +5,7 @@ import 'package:path/path.dart';
 
 class DatabaseHelper{
 
-  static final _dbName = "myDummy.db";
+  static final _dbName = "myDummy2.db";
   static final _dbVersion = 1;
   static final _tableName = "dummyTable";
 

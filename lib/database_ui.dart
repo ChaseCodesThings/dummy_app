@@ -5,7 +5,8 @@ class Data extends StatefulWidget {
   _DataState createState() => _DataState();
 }
 class _DataState extends State<Data>{
-  final datab = TextEditingController();
+  final val = TextEditingController();
+  final val2 = TextEditingController();
   @override
   Widget build(BuildContext) {
     return Scaffold(
@@ -16,9 +17,23 @@ class _DataState extends State<Data>{
           children: [
             TextField(
               style: TextStyle(
-                fontSize: 30,
+                fontSize: 20,
               ),
-              controller: datab
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Enter a Column Name"
+              ),
+                controller: val
+            ),
+            TextField(
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Enter an Column ID"
+                ),
+                controller: val2
             ),
 
             TextButton(
@@ -28,7 +43,7 @@ class _DataState extends State<Data>{
               ),
               onPressed: () async{
                 int i = await DatabaseHelper.instance.insert({
-                  DatabaseHelper.columnName : datab.text
+                  DatabaseHelper.columnName : val.text, DatabaseHelper.columnId : int.parse(val2.text)
                 });
                 print("the inserted id is $i");
               },
@@ -52,8 +67,7 @@ class _DataState extends State<Data>{
               ),
               onPressed: () async{
                 int updateId = await DatabaseHelper.instance.update({
-                  DatabaseHelper.columnId: 12,
-                  DatabaseHelper.columnName: "Mark"
+                  DatabaseHelper.columnName : val.text, DatabaseHelper.columnId : int.parse(val2.text)
                 });
                 print(updateId);
               },
@@ -65,8 +79,7 @@ class _DataState extends State<Data>{
                 foregroundColor: Colors.white,
               ),
               onPressed: () async{
-                //String data//
-                int rowsEffected = await DatabaseHelper.instance.delete(12);
+                int rowsEffected = await DatabaseHelper.instance.delete(int.parse(val2.text));
                 print(rowsEffected);
               },
               child: Text("delete"),
