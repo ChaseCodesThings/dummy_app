@@ -13,7 +13,7 @@ class _DataState extends State<Data>{
       appBar: AppBar(title: Text("Sqflite Database"),),
     body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             TextField(
               style: TextStyle(
