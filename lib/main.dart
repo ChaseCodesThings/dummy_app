@@ -43,6 +43,7 @@ class _MyAppState extends State<MyApp> {
                  alignment: Alignment.center,
                   color: Colors.blue,
                 child: const Text("Welcome to my App Prototype",
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 35),
                 )
               ),
