@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:translator/translator.dart';
-
 class Vocab extends StatefulWidget {
   @override
   _VocabState createState() => _VocabState();
@@ -15,8 +14,6 @@ class _VocabState extends State<Vocab>{
   @override
   Widget build(BuildContext context) {
     String current = vocab[position];
-
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Vocabulary"),
