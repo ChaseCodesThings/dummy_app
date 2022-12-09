@@ -12,6 +12,7 @@ class Ball extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
         width: 20,
+        height: 20,
       ),
     );
   }

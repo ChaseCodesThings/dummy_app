@@ -47,7 +47,6 @@ class _VocabState extends State<Vocab>{
                     setState(() {
                       out = translation.toString();
                     });
-                    print(out);
                   });
                 }
               ),
