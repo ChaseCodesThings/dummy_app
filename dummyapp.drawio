@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-12-13T14:31:07.048Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="58uNtqokqcwwzn-VArsW" version="20.6.2" type="github">
+<mxfile host="app.diagrams.net" modified="2022-12-13T14:33:06.903Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="7GF1r-WBD-B0g65_tfmw" version="20.6.2" type="github">
   <diagram name="Page-1" id="10a91c8b-09ff-31b1-d368-03940ed4cc9e">
     <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
       <root>
@@ -105,6 +105,9 @@
             <mxPoint x="530" y="420" as="sourcePoint" />
             <mxPoint x="580" y="370" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="WCMsSFBt4wPPEOY5lhQS-26" value="&lt;font size=&quot;1&quot; style=&quot;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Dummy App Static Hierarchy&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="395" y="10" width="310" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
