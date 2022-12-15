@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dummy_app/scorescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'ball.dart';
@@ -12,34 +13,59 @@ class Game extends StatefulWidget {
 enum direction{UP, DOWN, LEFT, RIGHT}
 
 class _GameState extends State<Game>{
-  //player variables
+  //player variables (bottom brick)
   double playerX = 0;
-  double playerWidth = 0.4;
-  //AI variables
+  double brickWidth = 0.4;
+  double playerScore = 0;
+
+  //enemy variables (top brick)
+  double enemyX = 0;
+  double enemyScore = 0;
 
   // ball variables
   double ballX = 0.0;
   double ballY = 0.0;
   var ballYDirection = direction.DOWN;
   var ballXDirection = direction.LEFT;
+
   //game settings
   bool gameStarted = false;
+
   void startGame() {
     gameStarted = true;
     Timer.periodic(Duration(milliseconds: 1), (timer) {
       //update direction
       updateDirection();
+
       //move ball
       moveBall();
-      //check if Game is over
-      if (isGameOver()) {
+
+      //move enemy
+      moveEnemy();
+
+      //check if player has lost
+      if (playerHasLost()) {
+        enemyScore++;
         timer.cancel();
-        _showDialog();
+        _showDialog(false);
+      }
+
+      //check if enemy has lost
+      if (enemyHasLost()) {
+        playerScore++;
+        timer.cancel();
+        _showDialog(true);
       }
     });
   }
 
-  void _showDialog() {
+  void moveEnemy() {
+    setState(() {
+      enemyX = ballX;
+    });
+  }
+
+  void _showDialog(bool enemyDied) {
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -48,7 +74,7 @@ class _GameState extends State<Game>{
             backgroundColor: Colors.purpleAccent,
             title: Center(
               child: Text(
-                "AI WON",
+                enemyDied ? "YOU WON" : "ENEMY WON",
                 style: TextStyle(color: Colors.white),
               ),
             ),
@@ -59,10 +85,10 @@ class _GameState extends State<Game>{
                   borderRadius: BorderRadius.circular(5),
                   child: Container(
                     padding: EdgeInsets.all(7),
-                    color: Colors.purpleAccent[100],
+                    color: enemyDied? Colors.white : Colors.red,
                     child: Text(
                       "PLAY AGAIN",
-                      style: TextStyle(color: Colors.purpleAccent[800])
+                      style: TextStyle(color: enemyDied? Colors.white : Colors.red)
                     ),
                   ),
                 ),
@@ -78,12 +104,20 @@ class _GameState extends State<Game>{
       gameStarted = false;
       ballX = 0;
       ballY = 0;
-      playerX = -0.2;
+      playerX = 0;
+      enemyX = 0;
     });
   }
 
-  bool isGameOver() {
+  bool playerHasLost() {
     if (ballY >= 1) {
+      return true;
+    }
+    return false;
+  }
+
+  bool enemyHasLost() {
+    if (ballY <= -1) {
       return true;
     }
     return false;
@@ -92,7 +126,7 @@ class _GameState extends State<Game>{
   void updateDirection() {
     setState(() {
       //update vertical direction
-      if (ballY >= 0.9 && playerX + playerWidth >= ballX && playerX <= ballX) {
+      if (ballY >= 0.9 && playerX + brickWidth >= ballX && playerX <= ballX) {
         ballYDirection = direction.UP;
       }
       else if (ballY <= -0.9) {
@@ -107,6 +141,7 @@ class _GameState extends State<Game>{
       }
     });
   }
+
   void moveBall() {
 
     //vertical movement
@@ -129,13 +164,17 @@ class _GameState extends State<Game>{
 
   void moveLeft() {
     setState(() {
-      playerX -= 0.1;
+      if (!(playerX - 0.1 <= -1)) {
+        playerX -= 0.1;
+      }
     });
   }
 
   void moveRight() {
     setState(() {
-      playerX += 0.1;
+      if (!(playerX + 0.1 >= 1)) {
+        playerX += 0.1;
+      }
     });
   }
 
@@ -155,24 +194,36 @@ class _GameState extends State<Game>{
       child: GestureDetector(
         onTap: startGame,
         child: Scaffold(
-          backgroundColor: Colors.deepPurpleAccent,
+          backgroundColor: Colors.grey[800],
           body: Center(
             child: Stack(
               children: [
                 //tap to play
                 CoverScreen(gameStarted: gameStarted,),
+
+                //score screen
+                ScoreScreen(
+                  gameStarted: gameStarted,
+                  enemyScore: enemyScore,
+                  playerScore: playerScore,
+                ),
+
                 //top brick
                 Brick(
-                    x: -0.2,
+                    x: enemyX,
                     y: -0.9,
-                    brickWidth: playerWidth,
+                    brickWidth: brickWidth,
+                    thisIsEnemy: true,
                 ),
+
                 //bottom brick
                 Brick(
                     x: playerX,
                     y: 0.9,
-                    brickWidth: playerWidth,
+                    brickWidth: brickWidth,
+                    thisIsEnemy: false,
                 ),
+
                 //ball
                 Ball(x: ballX, y: ballY),
               ],
