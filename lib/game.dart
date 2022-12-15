@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'ball.dart';
@@ -10,16 +9,19 @@ class Game extends StatefulWidget {
   _GameState createState() => _GameState();
 }
 
-enum direction{UP, DOWN}
+enum direction{UP, DOWN, LEFT, RIGHT}
 
 class _GameState extends State<Game>{
   //player variables
   double playerX = 0;
+  double playerWidth = 0.4;
+  //AI variables
 
   // ball variables
   double ballX = 0.0;
   double ballY = 0.0;
-  var ballDirection = direction.DOWN;
+  var ballYDirection = direction.DOWN;
+  var ballXDirection = direction.LEFT;
   //game settings
   bool gameStarted = false;
   void startGame() {
@@ -29,26 +31,98 @@ class _GameState extends State<Game>{
       updateDirection();
       //move ball
       moveBall();
+      //check if Game is over
+      if (isGameOver()) {
+        timer.cancel();
+        _showDialog();
+      }
     });
   }
+
+  void _showDialog() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.purpleAccent,
+            title: Center(
+              child: Text(
+                "AI WON",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            actions: [
+              GestureDetector(
+                onTap: resetGame,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: Container(
+                    padding: EdgeInsets.all(7),
+                    color: Colors.purpleAccent[100],
+                    child: Text(
+                      "PLAY AGAIN",
+                      style: TextStyle(color: Colors.purpleAccent[800])
+                    ),
+                  ),
+                ),
+              )
+            ],
+          );
+    });
+  }
+
+  void resetGame() {
+    Navigator.pop(context);
+    setState(() {
+      gameStarted = false;
+      ballX = 0;
+      ballY = 0;
+      playerX = -0.2;
+    });
+  }
+
+  bool isGameOver() {
+    if (ballY >= 1) {
+      return true;
+    }
+    return false;
+  }
+
   void updateDirection() {
     setState(() {
-      if (ballY >= 0.9) {
-        ballDirection = direction.UP;
+      //update vertical direction
+      if (ballY >= 0.9 && playerX + playerWidth >= ballX && playerX <= ballX) {
+        ballYDirection = direction.UP;
       }
       else if (ballY <= -0.9) {
-        ballDirection = direction.DOWN;
+        ballYDirection = direction.DOWN;
+      }
+      //update horizontal direction
+      if (ballX >= 1) {
+        ballXDirection = direction.LEFT;
+      }
+      else if (ballX <= -1) {
+        ballXDirection = direction.RIGHT;
       }
     });
   }
   void moveBall() {
+
     //vertical movement
     setState(() {
-      if (ballDirection == direction.DOWN) {
-        ballY += 0.01;
+      if (ballYDirection == direction.DOWN) {
+        ballY += 0.005;
       }
-      else if (ballDirection == direction.UP) {
-        ballY -= 0.01;
+      else if (ballYDirection == direction.UP) {
+        ballY -= 0.005;
+      }
+      //horizontal movement
+      if (ballXDirection == direction.LEFT) {
+        ballX -= 0.005;
+      }
+      else if (ballXDirection == direction.RIGHT) {
+        ballX += 0.005;
       }
     });
   }
@@ -88,9 +162,17 @@ class _GameState extends State<Game>{
                 //tap to play
                 CoverScreen(gameStarted: gameStarted,),
                 //top brick
-                Brick(x: 0.0, y: -0.9),
+                Brick(
+                    x: -0.2,
+                    y: -0.9,
+                    brickWidth: playerWidth,
+                ),
                 //bottom brick
-                Brick(x: playerX, y: 0.9),
+                Brick(
+                    x: playerX,
+                    y: 0.9,
+                    brickWidth: playerWidth,
+                ),
                 //ball
                 Ball(x: ballX, y: ballY),
               ],

@@ -4,7 +4,7 @@ class Ball extends StatelessWidget {
   final x;
   final y;
 
-  Ball({this.x, this.y});
+  Ball({this.x, this.y,});
   @override
   Widget build(BuildContext context) {
     return Container(
