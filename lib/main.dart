@@ -50,15 +50,15 @@ class _MyAppState extends State<MyApp> {
               ),
               Container(
                 color: Colors.white,
-                child: Translate()
+                child: Vocab()
               ),
               Container(
                   color: Colors.purple,
-                  child: Vocab()
+                  child: Game()
               ),
               Container(
                   color: Colors.amber,
-                  child: Game()
+                  child: Translate()
               ),
               Container(
                   color: Colors.blueGrey,
@@ -75,10 +75,10 @@ class _MyAppState extends State<MyApp> {
           },
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(icon: Icon(Icons.home), title: Text("Home")),
-            BottomNavyBarItem(icon: Icon(Icons.language), title: Text("Translation")),
             BottomNavyBarItem(icon: Icon(Icons.workspace_premium_outlined), title: Text("VocabUlary")),
             BottomNavyBarItem(icon: Icon(Icons.gamepad), title: Text("Game")),
-            BottomNavyBarItem(icon: Icon(Icons.dataset_rounded), title: Text("Database")),
+            BottomNavyBarItem(icon: Icon(Icons.language), title: Text("Translation")),
+            BottomNavyBarItem(icon: Icon(Icons.person_outline), title: Text("Database")),
           ],
         ),
       ),
