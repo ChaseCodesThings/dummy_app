@@ -10,13 +10,13 @@ class Brick extends StatelessWidget{
   Widget build(BuildContext context) {
     //(((2 * x) + brickWidth)/(2 - brickWidth))
     return Container(
-      alignment: Alignment(x, y),
+      alignment: Alignment((((2 * x) + brickWidth)/(2 - brickWidth)), y),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Container(
           color: thisIsEnemy ? Colors.red : Colors.white,
           height: 20,
-          width: MediaQuery.of(context).size.width / 5,
+          width: MediaQuery.of(context).size.width / 4,
         ),
       ),
     );

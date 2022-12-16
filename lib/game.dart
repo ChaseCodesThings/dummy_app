@@ -61,7 +61,12 @@ class _GameState extends State<Game>{
 
   void moveEnemy() {
     setState(() {
-      enemyX = ballX;
+      if (ballXDirection == direction.LEFT) {
+        enemyX -= 0.00035;
+      }
+      else if (ballXDirection == direction.RIGHT) {
+        enemyX += 0.00035;
+      }
     });
   }
 
@@ -71,11 +76,11 @@ class _GameState extends State<Game>{
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            backgroundColor: Colors.purpleAccent,
+            backgroundColor: enemyDied? Colors.white : Colors.red,
             title: Center(
               child: Text(
                 enemyDied ? "YOU WON" : "ENEMY WON",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: enemyDied? Colors.black : Colors.white,),
               ),
             ),
             actions: [
@@ -88,7 +93,7 @@ class _GameState extends State<Game>{
                     color: enemyDied? Colors.white : Colors.red,
                     child: Text(
                       "PLAY AGAIN",
-                      style: TextStyle(color: enemyDied? Colors.white : Colors.red)
+                      style: TextStyle(color: enemyDied? Colors.black : Colors.white)
                     ),
                   ),
                 ),
@@ -129,7 +134,7 @@ class _GameState extends State<Game>{
       if (ballY >= 0.9 && playerX + brickWidth >= ballX && playerX <= ballX) {
         ballYDirection = direction.UP;
       }
-      else if (ballY <= -0.9) {
+      else if (ballY <= -0.9 && enemyX + brickWidth >= ballX && playerX <= ballX) {
         ballYDirection = direction.DOWN;
       }
       //update horizontal direction
@@ -172,7 +177,7 @@ class _GameState extends State<Game>{
 
   void moveRight() {
     setState(() {
-      if (!(playerX + 0.1 >= 1)) {
+      if (!(playerX + 0.1 >= 0.7)) {
         playerX += 0.1;
       }
     });
@@ -204,8 +209,8 @@ class _GameState extends State<Game>{
                 //score screen
                 ScoreScreen(
                   gameStarted: gameStarted,
-                  enemyScore: enemyScore,
-                  playerScore: playerScore,
+                  enemyScore: enemyScore.round(),
+                  playerScore: playerScore.round(),
                 ),
 
                 //top brick
