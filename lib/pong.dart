@@ -5,14 +5,14 @@ import 'package:flutter/services.dart';
 import 'ball.dart';
 import 'brick.dart';
 import 'coverscreen.dart';
-class Game extends StatefulWidget {
+class Pong extends StatefulWidget {
   @override
-  _GameState createState() => _GameState();
+  _PongState createState() => _PongState();
 }
 
 enum direction{UP, DOWN, LEFT, RIGHT}
 
-class _GameState extends State<Game>{
+class _PongState extends State<Pong>{
   //player variables (bottom brick)
   double playerX = 0;
   double brickWidth = 0.4;
@@ -62,10 +62,10 @@ class _GameState extends State<Game>{
   void moveEnemy() {
     setState(() {
       if (ballXDirection == direction.LEFT) {
-        enemyX -= 0.00035;
+        enemyX -= 0.0035;
       }
       else if (ballXDirection == direction.RIGHT) {
-        enemyX += 0.00035;
+        enemyX += 0.0035;
       }
     });
   }

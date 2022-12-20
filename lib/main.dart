@@ -3,7 +3,7 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'mytranslator.dart';
 import 'package:dummy_app/vocab.dart';
 import 'package:dummy_app/database_ui.dart';
-import 'game.dart';
+import 'games.dart';
 
 void main(){
   runApp(MyApp());
@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
               ),
               Container(
                   color: Colors.purple,
-                  child: Game()
+                  child: Games()
               ),
               Container(
                   color: Colors.amber,
@@ -76,7 +76,7 @@ class _MyAppState extends State<MyApp> {
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(icon: Icon(Icons.home), title: Text("Home")),
             BottomNavyBarItem(icon: Icon(Icons.workspace_premium_outlined), title: Text("VocabUlary")),
-            BottomNavyBarItem(icon: Icon(Icons.gamepad), title: Text("Game")),
+            BottomNavyBarItem(icon: Icon(Icons.gamepad), title: Text("Games")),
             BottomNavyBarItem(icon: Icon(Icons.language), title: Text("Translation")),
             BottomNavyBarItem(icon: Icon(Icons.person_outline), title: Text("Database")),
           ],
