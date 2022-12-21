@@ -49,8 +49,8 @@ class _GamesState extends State<Games> {
             });
           },
           items: <BottomNavyBarItem>[
-            BottomNavyBarItem(icon: Icon(Icons.r_mobiledata), title: Text("Pong")),
-            BottomNavyBarItem(icon: Icon(Icons.radar), title: Text("Snake")),
+            BottomNavyBarItem(icon: Icon(Icons.gamepad_outlined), title: Text("Pong")),
+            BottomNavyBarItem(icon: Icon(Icons.garage_outlined), title: Text("Snake")),
 
           ],
         ),
