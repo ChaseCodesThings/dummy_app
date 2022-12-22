@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dummy_app/pong.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'flappybird.dart';
 
 class Games extends StatefulWidget {
   @override
@@ -37,7 +38,7 @@ class _GamesState extends State<Games> {
               ),
               Container(
                   color: Colors.white,
-                  child: Pong()
+                  child: FlappyBird()
               ),
             ],
           ),
