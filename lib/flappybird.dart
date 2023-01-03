@@ -1,3 +1,4 @@
+import 'package:dummy_app/barrier.dart';
 import 'package:dummy_app/bird.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -13,30 +14,42 @@ enum direction{UP}
 class _FlappyBirdState extends State<FlappyBird> {
   //bird variables
   static double birdY = 0;
-  static double birdWidth = 0;
-  static double birdHeight = 0;
+  static double birdWidth = 0.1;
+  static double birdHeight = 0.1;
   double initialPosition = birdY;
   double height = 0;
   double time = 0;
   double gravity = -4.9;
-  double velocity = 3.5;
+  double velocity = 2.9;
 
   //game settings
   bool gameHasStarted = false;
-
+  double score = 0;
   //barrier variables
-  static List<double> barrierX = [2, 2 + 1.5];
+  static List<double> barrierX = [1, 2.5, 4];
   static double barrierWidth = 0.5;
   List<List<double>> barrierHeight = [
-    [0.6, 0.4],
-    [0.4, 0.6],
+    [0.4, 0.2],
+    [0.2, 0.4],
+    [0.3, 0.5]
   ];
   void startGame() {
-    Timer.periodic(Duration(milliseconds: 50), (timer) {
+    gameHasStarted = true;
+    Timer.periodic(Duration(milliseconds: 5), (timer) {
+      time += 0.005;
       height = (gravity * time * time) + (velocity * time);
 
       setState(() {
         birdY = initialPosition - height;
+        for (int i = 0; i < barrierX.length; i++)
+          {
+            barrierX[i] -= 0.005;
+            if (barrierX[i] < -1.6){
+              barrierX[i] += 3;
+              score += 1;
+            }
+          }
+
       });
 
       if (birdIsDead()) {
@@ -44,8 +57,6 @@ class _FlappyBirdState extends State<FlappyBird> {
         gameHasStarted = false;
         _showDialog();
       }
-
-      time += 0.1;
     });
   }
 
@@ -55,6 +66,7 @@ class _FlappyBirdState extends State<FlappyBird> {
       birdY = 0;
       gameHasStarted = false;
       time = 0;
+      barrierX = [1, 2.5, 4];
     });
   }
 
@@ -102,8 +114,15 @@ class _FlappyBirdState extends State<FlappyBird> {
     if (birdY < -1 || birdY > 1) {
       return true;
     }
+    //checks if bird is within x and y coordinates of barrier
+    for (int i = 0; i < barrierX.length; i++){
+      if ((barrierX[i] <= birdWidth && barrierX[i] + barrierWidth >=-birdWidth) && (birdY <= -1 + barrierHeight[i][0] || birdY + birdHeight >= 1 - barrierHeight[i][1])){
+        return true;
+      }
+    }
     return false;
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -131,14 +150,83 @@ class _FlappyBirdState extends State<FlappyBird> {
                             style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
                         ),
+
+
+                        //top barrier 1
+                        MyBarrier(
+                          barrierX: barrierX[0],
+                          barrierWidth: barrierWidth,
+                          barrierHeight: barrierHeight[0][0],
+                          isThisBottomBarrier: false,
+                        ),
+                        //bottom barrier 1
+                        MyBarrier(
+                          barrierX: barrierX[0],
+                          barrierWidth: barrierWidth,
+                          barrierHeight: barrierHeight[0][1],
+                          isThisBottomBarrier: true,
+                        ),
+                        //top barrier 2
+                        MyBarrier(
+                          barrierX: barrierX[1],
+                          barrierWidth: barrierWidth,
+                          barrierHeight: barrierHeight[1][0],
+                          isThisBottomBarrier: false,
+                        ),
+                        //bottom barrier 2
+                        MyBarrier(
+                          barrierX: barrierX[1],
+                          barrierWidth: barrierWidth,
+                          barrierHeight: barrierHeight[1][1],
+                          isThisBottomBarrier: true,
+                        ),
+                        //top barrier 3
+                        MyBarrier(
+                          barrierX: barrierX[2],
+                          barrierWidth: barrierWidth,
+                          barrierHeight: barrierHeight[2][0],
+                          isThisBottomBarrier: false,
+                        ),
+                        //bottom barrier 3
+                        MyBarrier(
+                          barrierX: barrierX[2],
+                          barrierWidth: barrierWidth,
+                          barrierHeight: barrierHeight[2][1],
+                          isThisBottomBarrier: true,
+                        ),
                       ],
                     ),
                   ),
                 )
             ),
+            Container(
+              height: 15,
+              color: Colors.green,
+            ),
             Expanded(
                 child: Container(
                   color: Colors.brown,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('SCORE', style: TextStyle(color: Colors.white, fontSize: 30)),
+                          SizedBox(height: 20),
+                          Text('0', style: TextStyle(color: Colors.white, fontSize: 30)),
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('BEST', style: TextStyle(color: Colors.white, fontSize: 30)),
+                          SizedBox(height: 20, width: 20,),
+                          Text('0', style: TextStyle(color: Colors.white, fontSize: 30)),
+                        ],
+                      ),
+                  ],
+                  ),
                 )
             ),
           ],
