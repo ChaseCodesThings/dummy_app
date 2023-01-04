@@ -11,12 +11,14 @@ class MyBird extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment(0, (2 * birdY + birdHeight) / (2 - birdHeight)),
+      alignment: Alignment(0, ((2 * birdY + birdHeight) / (2 - birdHeight)) + 0.5),
       child: Image.asset('assets/flappybird.png',
-        width: MediaQuery.of(context).size.width * birdWidth,
-        height: MediaQuery.of(context).size.height * (3/4) * (birdHeight / 2),
+        width: 150,
+        height: 150,
         fit: BoxFit.fill,
       ),
     );
   }
 }
+//width: MediaQuery.of(context).size.width * birdWidth,
+//         height: MediaQuery.of(context).size.height * (3/4) * (birdHeight / 2),

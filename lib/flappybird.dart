@@ -1,3 +1,7 @@
+//change barrier, add list of englsih words and their spansh pairs, add text box to display english words
+
+
+
 import 'package:dummy_app/barrier.dart';
 import 'package:dummy_app/bird.dart';
 import 'package:flutter/material.dart';
@@ -28,11 +32,7 @@ class _FlappyBirdState extends State<FlappyBird> {
   //barrier variables
   static List<double> barrierX = [1, 2.5, 4];
   static double barrierWidth = 0.5;
-  List<List<double>> barrierHeight = [
-    [0.4, 0.2],
-    [0.2, 0.4],
-    [0.3, 0.5]
-  ];
+  static double barrierHeight = 0.75;
   void startGame() {
     gameHasStarted = true;
     Timer.periodic(Duration(milliseconds: 5), (timer) {
@@ -116,9 +116,9 @@ class _FlappyBirdState extends State<FlappyBird> {
     }
     //checks if bird is within x and y coordinates of barrier
     for (int i = 0; i < barrierX.length; i++){
-      if ((barrierX[i] <= birdWidth && barrierX[i] + barrierWidth >=-birdWidth) && (birdY <= -1 + barrierHeight[i][0] || birdY + birdHeight >= 1 - barrierHeight[i][1])){
+      /*if () {
         return true;
-      }
+      }*/
     }
     return false;
   }
@@ -150,48 +150,55 @@ class _FlappyBirdState extends State<FlappyBird> {
                             style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
                         ),
+                        Container(
+                          alignment: Alignment(-1, -1),
+                          child: Text(
+                            gameHasStarted ? '' : 'English word',
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                        ),
 
 
                         //top barrier 1
                         MyBarrier(
                           barrierX: barrierX[0],
                           barrierWidth: barrierWidth,
-                          barrierHeight: barrierHeight[0][0],
+                          barrierHeight: barrierHeight,
                           isThisBottomBarrier: false,
                         ),
                         //bottom barrier 1
                         MyBarrier(
                           barrierX: barrierX[0],
                           barrierWidth: barrierWidth,
-                          barrierHeight: barrierHeight[0][1],
+                          barrierHeight: barrierHeight,
                           isThisBottomBarrier: true,
                         ),
                         //top barrier 2
                         MyBarrier(
                           barrierX: barrierX[1],
                           barrierWidth: barrierWidth,
-                          barrierHeight: barrierHeight[1][0],
+                          barrierHeight: barrierHeight,
                           isThisBottomBarrier: false,
                         ),
                         //bottom barrier 2
                         MyBarrier(
                           barrierX: barrierX[1],
                           barrierWidth: barrierWidth,
-                          barrierHeight: barrierHeight[1][1],
+                          barrierHeight: barrierHeight,
                           isThisBottomBarrier: true,
                         ),
                         //top barrier 3
                         MyBarrier(
                           barrierX: barrierX[2],
                           barrierWidth: barrierWidth,
-                          barrierHeight: barrierHeight[2][0],
+                          barrierHeight: barrierHeight,
                           isThisBottomBarrier: false,
                         ),
                         //bottom barrier 3
                         MyBarrier(
                           barrierX: barrierX[2],
                           barrierWidth: barrierWidth,
-                          barrierHeight: barrierHeight[2][1],
+                          barrierHeight: barrierHeight,
                           isThisBottomBarrier: true,
                         ),
                       ],
