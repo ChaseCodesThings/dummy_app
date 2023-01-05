@@ -6,6 +6,7 @@ import 'package:dummy_app/barrier.dart';
 import 'package:dummy_app/bird.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:math';
 
 class FlappyBird extends StatefulWidget {
 
@@ -31,14 +32,26 @@ class _FlappyBirdState extends State<FlappyBird> {
   double score = 0;
   //barrier variables
   static List<double> barrierX = [1, 2.5, 4];
+  static List<List<String>> vocab = [
+    ['dog', 'perro'],
+    ['cat', 'gato'],
+    ['red', 'rojo'],
+    ['blue', 'azul'],
+    ['hot', 'caliente'],
+    //['cold', 'frio']
+  ];
+  int rndNum = Random().nextInt(vocab.length) + 1;
+  String engWord = '';
+  String spnWord1 = '';
+  String spnWord2 = '';
   static double barrierWidth = 0.5;
   static double barrierHeight = 0.75;
+
   void startGame() {
     gameHasStarted = true;
     Timer.periodic(Duration(milliseconds: 5), (timer) {
       time += 0.005;
       height = (gravity * time * time) + (velocity * time);
-
       setState(() {
         birdY = initialPosition - height;
         for (int i = 0; i < barrierX.length; i++)
@@ -49,7 +62,19 @@ class _FlappyBirdState extends State<FlappyBird> {
               score += 1;
             }
           }
+        for (int i = 0; i < vocab.length; i++) {
+          if (! birdIsDead()) {
+            engWord = vocab[i][0];
+            spnWord1 = vocab[i][1];
+            if (rndNum != i){
+              spnWord2 = vocab[rndNum][1];
+            }
+          }
+          print (engWord);
+          print(spnWord1);
+          print(spnWord2);
 
+        }
       });
 
       if (birdIsDead()) {
@@ -110,16 +135,13 @@ class _FlappyBirdState extends State<FlappyBird> {
     });
   }
 
+
+
   bool birdIsDead() {
     if (birdY < -1 || birdY > 1) {
       return true;
     }
     //checks if bird is within x and y coordinates of barrier
-    for (int i = 0; i < barrierX.length; i++){
-      /*if () {
-        return true;
-      }*/
-    }
     return false;
   }
 
@@ -150,20 +172,13 @@ class _FlappyBirdState extends State<FlappyBird> {
                             style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
                         ),
-                        Container(
-                          alignment: Alignment(-1, -1),
-                          child: Text(
-                            gameHasStarted ? '' : 'English word',
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                        ),
-
 
                         //top barrier 1
                         MyBarrier(
                           barrierX: barrierX[0],
                           barrierWidth: barrierWidth,
                           barrierHeight: barrierHeight,
+                          barrierText: spnWord1,
                           isThisBottomBarrier: false,
                         ),
                         //bottom barrier 1
@@ -171,6 +186,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierX: barrierX[0],
                           barrierWidth: barrierWidth,
                           barrierHeight: barrierHeight,
+                          barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),
                         //top barrier 2
@@ -178,6 +194,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierX: barrierX[1],
                           barrierWidth: barrierWidth,
                           barrierHeight: barrierHeight,
+                          barrierText: spnWord1,
                           isThisBottomBarrier: false,
                         ),
                         //bottom barrier 2
@@ -185,6 +202,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierX: barrierX[1],
                           barrierWidth: barrierWidth,
                           barrierHeight: barrierHeight,
+                          barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),
                         //top barrier 3
@@ -192,6 +210,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierX: barrierX[2],
                           barrierWidth: barrierWidth,
                           barrierHeight: barrierHeight,
+                          barrierText: spnWord1,
                           isThisBottomBarrier: false,
                         ),
                         //bottom barrier 3
@@ -199,6 +218,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierX: barrierX[2],
                           barrierWidth: barrierWidth,
                           barrierHeight: barrierHeight,
+                          barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),
                       ],
@@ -216,6 +236,14 @@ class _FlappyBirdState extends State<FlappyBird> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('English Word', style: TextStyle(color: Colors.white, fontSize: 30)),
+                          SizedBox(height: 20),
+                          Text(engWord, style: TextStyle(color: Colors.white, fontSize: 30)),
+                        ],
+                      ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
