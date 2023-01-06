@@ -1,6 +1,5 @@
-//change barrier, add list of englsih words and their spansh pairs, add text box to display english words
-
-
+//change barrier, add list of englsih words and their spanish pairs, add text box to display english words
+// add boolean to test wheter bird is inside barrier(make it true) then chnage it back to false when bird is outside barrier
 
 import 'package:dummy_app/barrier.dart';
 import 'package:dummy_app/bird.dart';
@@ -29,7 +28,7 @@ class _FlappyBirdState extends State<FlappyBird> {
 
   //game settings
   bool gameHasStarted = false;
-  double score = 0;
+  int score = 0;
   //barrier variables
   static List<double> barrierX = [1, 2.5, 4];
   static List<List<String>> vocab = [
@@ -38,12 +37,13 @@ class _FlappyBirdState extends State<FlappyBird> {
     ['red', 'rojo'],
     ['blue', 'azul'],
     ['hot', 'caliente'],
-    //['cold', 'frio']
+    ['cold', 'frio']
   ];
   int rndNum = Random().nextInt(vocab.length) + 1;
   String engWord = '';
   String spnWord1 = '';
   String spnWord2 = '';
+  bool rightWord = false;
   static double barrierWidth = 0.5;
   static double barrierHeight = 0.75;
 
@@ -57,24 +57,27 @@ class _FlappyBirdState extends State<FlappyBird> {
         for (int i = 0; i < barrierX.length; i++)
           {
             barrierX[i] -= 0.005;
-            if (barrierX[i] < -1.6){
+            if (barrierX[i] < -1.6) {
               barrierX[i] += 3;
-              score += 1;
+              score++;
+              }
+            if (barrierX[i] < -0.5) {
+              score++;
             }
-          }
-        for (int i = 0; i < vocab.length; i++) {
-          if (! birdIsDead()) {
-            engWord = vocab[i][0];
-            spnWord1 = vocab[i][1];
-            if (rndNum != i){
-              spnWord2 = vocab[rndNum][1];
+            for (int j = 0; j < vocab.length; j++) {
+              if (barrierX[i] < -0.5){
+                  engWord = vocab[j][0];
+                  spnWord1 = vocab[j][1];
+                  if (rndNum != j){
+                    spnWord2 = vocab[rndNum][1];
+                  }
+              }
             }
           }
           print (engWord);
           print(spnWord1);
           print(spnWord2);
-
-        }
+          print(rndNum);
       });
 
       if (birdIsDead()) {
@@ -90,8 +93,9 @@ class _FlappyBirdState extends State<FlappyBird> {
     setState(() {
       birdY = 0;
       gameHasStarted = false;
-      time = 0;
+      time = 0.005;
       barrierX = [1, 2.5, 4];
+      height = (gravity * time * time) + (velocity * time);
     });
   }
 
@@ -138,13 +142,12 @@ class _FlappyBirdState extends State<FlappyBird> {
 
 
   bool birdIsDead() {
-    if (birdY < -1 || birdY > 1) {
+    if (birdY < -1 || birdY > 1)  {
       return true;
     }
-    //checks if bird is within x and y coordinates of barrier
+
     return false;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -180,6 +183,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierHeight: barrierHeight,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
+                          rightWord: rightWord,
                         ),
                         //bottom barrier 1
                         MyBarrier(
@@ -188,6 +192,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierHeight: barrierHeight,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
+                          rightWord: rightWord,
                         ),
                         //top barrier 2
                         MyBarrier(
@@ -196,6 +201,9 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierHeight: barrierHeight,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
+                          rightWord: rightWord,
+
+
                         ),
                         //bottom barrier 2
                         MyBarrier(
@@ -204,6 +212,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierHeight: barrierHeight,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
+                          rightWord: rightWord,
                         ),
                         //top barrier 3
                         MyBarrier(
@@ -212,6 +221,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierHeight: barrierHeight,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
+                          rightWord: rightWord,
                         ),
                         //bottom barrier 3
                         MyBarrier(
@@ -220,6 +230,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierHeight: barrierHeight,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
+                          rightWord: rightWord,
                         ),
                       ],
                     ),
@@ -249,17 +260,17 @@ class _FlappyBirdState extends State<FlappyBird> {
                         children: [
                           Text('SCORE', style: TextStyle(color: Colors.white, fontSize: 30)),
                           SizedBox(height: 20),
-                          Text('0', style: TextStyle(color: Colors.white, fontSize: 30)),
+                          Text('${score}', style: TextStyle(color: Colors.white, fontSize: 30)),
                         ],
                       ),
-                      Column(
+                      /*Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text('BEST', style: TextStyle(color: Colors.white, fontSize: 30)),
                           SizedBox(height: 20, width: 20,),
                           Text('0', style: TextStyle(color: Colors.white, fontSize: 30)),
                         ],
-                      ),
+                      ),*/
                   ],
                   ),
                 )
@@ -270,4 +281,3 @@ class _FlappyBirdState extends State<FlappyBird> {
     );
   }
 }
-
