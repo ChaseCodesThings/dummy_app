@@ -1,4 +1,4 @@
-//add account, select account, delete account, set default account
+// select account, set default account
 
 import 'package:flutter/material.dart';
 import 'database_helper.dart';
@@ -23,7 +23,7 @@ class _DataState extends State<Data>{
               ),
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: "Enter a Column Name"
+                labelText: "Enter a User Name"
               ),
                 controller: val
             ),
@@ -33,7 +33,7 @@ class _DataState extends State<Data>{
                 ),
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: "Enter an Column ID"
+                    labelText: "Enter a User Number"
                 ),
                 controller: val2
             ),
@@ -49,18 +49,7 @@ class _DataState extends State<Data>{
                 });
                 print("the inserted id is $i");
               },
-              child: Text("insert"),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-              ),
-              onPressed: () async{
-                List<Map<String,dynamic>> queryRows = await DatabaseHelper.instance.queryAll();
-                print(queryRows);
-              },
-              child: Text("query"),
+              child: Text("Add Account"),
             ),
             TextButton(
               style: TextButton.styleFrom(
@@ -73,7 +62,18 @@ class _DataState extends State<Data>{
                 });
                 print(updateId);
               },
-              child: Text("update"),
+              child: Text("Set Default account"),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () async{
+                List<Map<String,dynamic>> queryRows = await DatabaseHelper.instance.queryAll();
+                print(queryRows);
+              },
+              child: Text("Show all Accounts"),
             ),
             TextButton(
               style: TextButton.styleFrom(
@@ -84,7 +84,7 @@ class _DataState extends State<Data>{
                 int rowsEffected = await DatabaseHelper.instance.delete(int.parse(val2.text));
                 print(rowsEffected);
               },
-              child: Text("delete"),
+              child: Text("Delete Account"),
             ),
           ],
         ),

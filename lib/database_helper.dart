@@ -1,3 +1,4 @@
+//add account, select account, delete account, set default account
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -48,6 +49,11 @@ class DatabaseHelper{
   Future<List<Map<String,dynamic>>> queryAll() async{
     Database? db = await instance.database;
     return await db!.query(_tableName);
+  }
+
+  Future<List<Map<String,dynamic>>> setDefault(Map<String,dynamic> row) async{
+    Database? db = await instance.database;
+    return await db!.query(_tableName,);
   }
 
   Future update(Map<String,dynamic> row) async{
