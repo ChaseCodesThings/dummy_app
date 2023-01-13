@@ -1,10 +1,16 @@
 //change barrier, add list of englsih words and their spanish pairs, add text box to display english words
 // add boolean to test wheter bird is inside barrier(make it true) then chnage it back to false when bird is outside barrier
 
+//display an english word, display a correctly translated spanish word, display an incorrectly translated spanish word
+// if bird chooses wrong translation, the game stops
+//what barrier is right must alternate between different sets
+//if bird chooses right translation: the score is increased by 1, the english word and its two translations are switched for a different set
+
 import 'package:dummy_app/barrier.dart';
 import 'package:dummy_app/bird.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:translator/translator.dart';
 import 'dart:math';
 
 class FlappyBird extends StatefulWidget {
@@ -30,16 +36,9 @@ class _FlappyBirdState extends State<FlappyBird> {
   bool gameHasStarted = false;
   int score = 0;
   //barrier variables
+  GoogleTranslator translator = GoogleTranslator();
   static List<double> barrierX = [1, 2.5, 4];
-  static List<List<String>> vocab = [
-    ['dog', 'perro'],
-    ['cat', 'gato'],
-    ['red', 'rojo'],
-    ['blue', 'azul'],
-    ['hot', 'caliente'],
-    ['cold', 'frio']
-  ];
-  int rndNum = Random().nextInt(vocab.length) + 1;
+  static List<String> engVocab = ['dog', 'cat', 'fish', 'bird', 'red', 'blue', 'white', 'black'];
   String engWord = '';
   String spnWord1 = '';
   String spnWord2 = '';
@@ -59,25 +58,11 @@ class _FlappyBirdState extends State<FlappyBird> {
             barrierX[i] -= 0.005;
             if (barrierX[i] < -1.6) {
               barrierX[i] += 3;
-              score++;
               }
-            if (barrierX[i] < -0.5) {
-              score++;
-            }
-            for (int j = 0; j < vocab.length; j++) {
-              if (barrierX[i] < -0.5){
-                  engWord = vocab[j][0];
-                  spnWord1 = vocab[j][1];
-                  if (rndNum != j){
-                    spnWord2 = vocab[rndNum][1];
-                  }
-              }
-            }
           }
           print (engWord);
           print(spnWord1);
           print(spnWord2);
-          print(rndNum);
       });
 
       if (birdIsDead()) {
@@ -85,6 +70,7 @@ class _FlappyBirdState extends State<FlappyBird> {
         gameHasStarted = false;
         _showDialog();
       }
+
     });
   }
 
@@ -93,7 +79,7 @@ class _FlappyBirdState extends State<FlappyBird> {
     setState(() {
       birdY = 0;
       gameHasStarted = false;
-      time = 0.005;
+      time = 0;
       barrierX = [1, 2.5, 4];
       height = (gravity * time * time) + (velocity * time);
     });
@@ -202,8 +188,6 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
                           rightWord: rightWord,
-
-
                         ),
                         //bottom barrier 2
                         MyBarrier(
