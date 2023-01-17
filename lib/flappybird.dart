@@ -89,6 +89,14 @@ class _FlappyBirdState extends State<FlappyBird> {
   void resetGame() {
     Navigator.pop(context);
     setState(() {
+       gameHasStarted = false;
+       score = 0;
+      //barrier variables
+       barrierX = [1, 2.5, 4, 5.5, 7];
+       engWord = vocab[0][0];
+       spnWord1 = vocab[0][1];
+       spnWord2 = vocab[0][2];
+
       birdY = 0;
       gameHasStarted = false;
       time = 0;
