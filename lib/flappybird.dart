@@ -94,6 +94,7 @@ class _FlappyBirdState extends State<FlappyBird> {
       time = 0;
       barrierX = [1, 2.5, 4];
       height = (gravity * time * time) + (velocity * time);
+
     });
   }
 
