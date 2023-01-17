@@ -38,11 +38,18 @@ class _FlappyBirdState extends State<FlappyBird> {
   //barrier variables
   GoogleTranslator translator = GoogleTranslator();
   static List<double> barrierX = [1, 2.5, 4];
-  static List<String> engVocab = ['dog', 'cat', 'fish', 'bird', 'red', 'blue', 'white', 'black'];
-  String engWord = '';
-  String spnWord1 = '';
-  String spnWord2 = '';
-  bool rightWord = false;
+  static List<List<String>> vocab = [
+    ['dog', 'perro', 'gato'],//top
+    ['cat', 'perro', 'gato'],//bottom
+    ['red', 'azul', 'rojo'],//bottom
+    ['blue', 'azul', 'rojo'],//top
+    ['hot', 'frio', 'caliente'],//bottom
+    ['cold', 'frio', 'caliente']//top
+  ];
+
+  String engWord = vocab[0][0];
+  String spnWord1 = vocab[0][1];
+  String spnWord2 = vocab[0][2];
   static double barrierWidth = 0.5;
   static double barrierHeight = 0.75;
 
@@ -53,16 +60,21 @@ class _FlappyBirdState extends State<FlappyBird> {
       height = (gravity * time * time) + (velocity * time);
       setState(() {
         birdY = initialPosition - height;
-        for (int i = 0; i < barrierX.length; i++)
-          {
-            barrierX[i] -= 0.005;
-            if (barrierX[i] < -1.6) {
-              barrierX[i] += 3;
-              }
+        for (int i = 0; i < barrierX.length; i++) {
+          barrierX[i] -= 0.005;
+          if (barrierX[i] < -1.6) {
+            barrierX[i] += 3;
           }
-          print (engWord);
-          print(spnWord1);
-          print(spnWord2);
+        }
+        if (barrierX[score] < -0.5) {
+              score++;
+              engWord = vocab[score][0];
+              spnWord1 = vocab[score][1];
+              spnWord2 = vocab[score][2];
+          }
+        //print(engWord);
+        //print(spnWord1);
+        //print(spnWord2);
       });
 
       if (birdIsDead()) {
@@ -125,16 +137,19 @@ class _FlappyBirdState extends State<FlappyBird> {
     });
   }
 
-
-
-  bool birdIsDead() {
-    if (birdY < -1 || birdY > 1)  {
+  bool topRightWord() {
+    if (engWord.translate(to: 'es') == spnWord1) {
       return true;
     }
-
     return false;
   }
 
+  bool birdIsDead() {
+    if ((birdY < -1 || birdY > 1) && (!topRightWord() && ((barrierX[score] <= birdWidth && barrierX[score] + barrierWidth >= -birdWidth) && (birdY > barrierHeight )))) {
+      return true;
+    }
+    return false;
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -169,7 +184,6 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierHeight: barrierHeight,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
-                          rightWord: rightWord,
                         ),
                         //bottom barrier 1
                         MyBarrier(
@@ -178,7 +192,6 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierHeight: barrierHeight,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
-                          rightWord: rightWord,
                         ),
                         //top barrier 2
                         MyBarrier(
@@ -187,7 +200,6 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierHeight: barrierHeight,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
-                          rightWord: rightWord,
                         ),
                         //bottom barrier 2
                         MyBarrier(
@@ -196,7 +208,6 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierHeight: barrierHeight,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
-                          rightWord: rightWord,
                         ),
                         //top barrier 3
                         MyBarrier(
@@ -205,7 +216,6 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierHeight: barrierHeight,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
-                          rightWord: rightWord,
                         ),
                         //bottom barrier 3
                         MyBarrier(
@@ -214,7 +224,6 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierHeight: barrierHeight,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
-                          rightWord: rightWord,
                         ),
                       ],
                     ),

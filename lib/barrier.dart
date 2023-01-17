@@ -7,7 +7,6 @@ class MyBarrier extends StatelessWidget {
   final barrierText;
   //final barrierLocation;
   final bool isThisBottomBarrier;
-  final bool rightWord;
 
   MyBarrier({
     this.barrierHeight,
@@ -15,7 +14,6 @@ class MyBarrier extends StatelessWidget {
     this.barrierX,
     this.barrierText,
     required this.isThisBottomBarrier,
-    required this.rightWord,
 });
 
   @override
