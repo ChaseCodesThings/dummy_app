@@ -1,16 +1,7 @@
-//change barrier, add list of englsih words and their spanish pairs, add text box to display english words
-// add boolean to test wheter bird is inside barrier(make it true) then chnage it back to false when bird is outside barrier
-
-//display an english word, display a correctly translated spanish word, display an incorrectly translated spanish word
-// if bird chooses wrong translation, the game stops
-//what barrier is right must alternate between different sets
-//if bird chooses right translation: the score is increased by 1, the english word and its two translations are switched for a different set
-
 import 'package:dummy_app/barrier.dart';
 import 'package:dummy_app/bird.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:translator/translator.dart';
 
 class FlappyBird extends StatefulWidget {
 
@@ -64,7 +55,7 @@ class _FlappyBirdState extends State<FlappyBird> {
             barrierX[i] += 3;
           }
         }
-        if (barrierX[score % barrierX.length] < -0.5) {
+        if (barrierX[score % barrierX.length] <= -0.5) {
               score++;
               engWord = vocab[score][0];
               spnWord1 = vocab[score][1];
@@ -88,7 +79,7 @@ class _FlappyBirdState extends State<FlappyBird> {
        gameHasStarted = false;
        score = 0;
       //barrier variables
-       barrierX = [1, 2.5, 4,];
+       barrierX = [1, 2.5, 4];
        engWord = vocab[0][0];
        spnWord1 = vocab[0][1];
        spnWord2 = vocab[0][2];
@@ -136,9 +127,7 @@ class _FlappyBirdState extends State<FlappyBird> {
   void jump() {
     setState(() {
       time = 0;
-      if (!((birdY <= -1) || (birdY >= 1))){
-        initialPosition = birdY;
-      }
+      initialPosition = birdY;
     });
   }
 
@@ -150,7 +139,7 @@ class _FlappyBirdState extends State<FlappyBird> {
   }
 
   bool birdIsDead() {
-    if (!topRightWord() && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY <= 0)) {
+    if ((((birdY <= -1) || (birdY >= 1))) || (!topRightWord() && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY <= 0))) {
       return true;
     }
     return false;
