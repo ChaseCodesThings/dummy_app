@@ -26,7 +26,7 @@ class _FlappyBirdState extends State<FlappyBird> {
   bool gameHasStarted = false;
   int score = 0;
   //barrier variables
-  static List<double> barrierX = [1, 2.5, 4];
+  static List<double> barrierX = [1, 3.5];
   static List<List<String>> vocab = [
     ['dog', 'perro', 'gato', 'perro'],//top
     ['cat', 'perro', 'gato', 'gato'],//bottom
@@ -53,8 +53,8 @@ class _FlappyBirdState extends State<FlappyBird> {
         birdY = initialPosition - height;
         for (int i = 0; i < barrierX.length; i++) {
           barrierX[i] -= 0.005;
-          if (barrierX[i] < -1.6) {
-            barrierX[i] += 3;
+          if ((barrierX[i] < -1.6) && (score <= barrierX.length)) {
+            barrierX[i] += 5;
           }
         }
         if (barrierX[score % barrierX.length] <= -0.7) {
@@ -79,7 +79,7 @@ class _FlappyBirdState extends State<FlappyBird> {
        gameHasStarted = false;
        score = 0;
       //barrier variables
-       barrierX = [1, 2.5, 4];
+       barrierX = [1.5, 3];
        engWord = vocab[0][0];
        spnWord1 = vocab[0][1];
        spnWord2 = vocab[0][2];
@@ -99,7 +99,7 @@ class _FlappyBirdState extends State<FlappyBird> {
   }
 
   bool birdIsDead() {
-    if ((((birdY <= -1.75) || (birdY >= 1))) || ((!topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY <= 0)) || ((topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY >= 0))) {
+    if ((((birdY <= -1.75) || (birdY >= 1))) || ((!topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY <= -0.25)) || ((topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY >= -0.25))) {
       return true;
     }
     return false;
@@ -206,7 +206,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                           isThisBottomBarrier: true,
                         ),
                         //top barrier 3
-                        MyBarrier(
+                        /*MyBarrier(
                           barrierX: barrierX[2],
                           barrierWidth: barrierWidth,
                           barrierHeight: barrierHeight,
@@ -220,7 +220,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierHeight: barrierHeight,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
-                        ),
+                        ),*/
                       ],
                     ),
                   ),
