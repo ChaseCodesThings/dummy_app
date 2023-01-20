@@ -42,6 +42,8 @@ class _FlappyBirdState extends State<FlappyBird> {
   static double barrierWidth = 0.5;
   static double barrierHeight = 0.75;
 
+
+
   void startGame() {
     gameHasStarted = true;
     Timer.periodic(Duration(milliseconds: 5), (timer) {
@@ -55,7 +57,7 @@ class _FlappyBirdState extends State<FlappyBird> {
             barrierX[i] += 3;
           }
         }
-        if (barrierX[score % barrierX.length] <= -0.5) {
+        if (barrierX[score % barrierX.length] <= -0.7) {
               score++;
               engWord = vocab[score][0];
               spnWord1 = vocab[score][1];
@@ -63,13 +65,11 @@ class _FlappyBirdState extends State<FlappyBird> {
               corWord = vocab[score][3];
           }
       });
-
       if (birdIsDead()) {
         timer.cancel();
         gameHasStarted = false;
         _showDialog();
       }
-
     });
   }
 
@@ -85,10 +85,24 @@ class _FlappyBirdState extends State<FlappyBird> {
        spnWord2 = vocab[0][2];
        corWord = vocab[0][3];
         birdY = 0;
+       initialPosition = birdY;
         time = 0;
         height = (gravity * time * time) + (velocity * time);
-
     });
+  }
+
+  bool topRightWord() {
+    if (spnWord1 == corWord) {
+      return true;
+    }
+    return false;
+  }
+
+  bool birdIsDead() {
+    if ((((birdY <= -1.75) || (birdY >= 1))) || ((!topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY <= 0)) || ((topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY >= 0))) {
+      return true;
+    }
+    return false;
   }
 
   void _showDialog() {
@@ -131,19 +145,7 @@ class _FlappyBirdState extends State<FlappyBird> {
     });
   }
 
-  bool topRightWord() {
-    if (spnWord1 == corWord) {
-      return true;
-    }
-    return false;
-  }
 
-  bool birdIsDead() {
-    if ((((birdY <= -1) || (birdY >= 1))) || (!topRightWord() && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY <= 0))) {
-      return true;
-    }
-    return false;
-  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
