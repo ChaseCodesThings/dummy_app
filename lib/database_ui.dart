@@ -1,4 +1,4 @@
-// select account, set default account
+// change show all accounts to drop down menu
 
 import 'package:flutter/material.dart';
 import 'database_helper.dart';
