@@ -14,7 +14,7 @@ enum direction{UP}
 class _FlappyBirdState extends State<FlappyBird> {
   //bird variables
   static double birdY = 0;
-  static double birdWidth = 0.1;
+  static double birdWidth = 0.0001;
   static double birdHeight = 0.1;
   double initialPosition = birdY;
   double height = 0;
@@ -57,7 +57,7 @@ class _FlappyBirdState extends State<FlappyBird> {
             barrierX[i] += 4;
           }
         }
-        if (barrierX[score % barrierX.length] <= -0.7) {
+        if ((barrierX[score % barrierX.length] <= -0.7) && (score < vocab.length)) {
               score++;
               engWord = vocab[score][0];
               spnWord1 = vocab[score][1];
@@ -68,6 +68,8 @@ class _FlappyBirdState extends State<FlappyBird> {
       if (birdIsDead()) {
         timer.cancel();
         gameHasStarted = false;
+        print(birdY);
+        print(barrierX.length);
         _showDialog();
       }
     });
@@ -205,22 +207,6 @@ class _FlappyBirdState extends State<FlappyBird> {
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),
-                        //top barrier 3
-                        /*MyBarrier(
-                          barrierX: barrierX[2],
-                          barrierWidth: barrierWidth,
-                          barrierHeight: barrierHeight,
-                          barrierText: spnWord1,
-                          isThisBottomBarrier: false,
-                        ),
-                        //bottom barrier 3
-                        MyBarrier(
-                          barrierX: barrierX[2],
-                          barrierWidth: barrierWidth,
-                          barrierHeight: barrierHeight,
-                          barrierText: spnWord2,
-                          isThisBottomBarrier: true,
-                        ),*/
                       ],
                     ),
                   ),
@@ -252,14 +238,6 @@ class _FlappyBirdState extends State<FlappyBird> {
                           Text('${score}', style: TextStyle(color: Colors.white, fontSize: 30)),
                         ],
                       ),
-                      /*Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('BEST', style: TextStyle(color: Colors.white, fontSize: 30)),
-                          SizedBox(height: 20, width: 20,),
-                          Text('0', style: TextStyle(color: Colors.white, fontSize: 30)),
-                        ],
-                      ),*/
                   ],
                   ),
                 )
