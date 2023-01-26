@@ -14,12 +14,12 @@ enum direction{UP}
 class _FlappyBirdState extends State<FlappyBird> {
   //bird variables
   static double birdY = 0;
-  static double birdWidth = 0.0001;
+  static double birdWidth = 0.1;
   static double birdHeight = 0.1;
   double initialPosition = birdY;
   double height = 0;
   double time = 0;
-  double gravity = -4.9;
+  double gravity = -4.5;
   double velocity = 2.9;
 
   //game settings
@@ -53,17 +53,21 @@ class _FlappyBirdState extends State<FlappyBird> {
         birdY = initialPosition - height;
         for (int i = 0; i < barrierX.length; i++) {
           barrierX[i] -= 0.005;
-          if ((barrierX[i] < -1.6) && (score <= barrierX.length)) {
+          if ((barrierX[i] < -1.6) && (score < vocab.length - 1)) {
             barrierX[i] += 4;
           }
         }
-        if ((barrierX[score % barrierX.length] <= -0.7) && (score < vocab.length)) {
+        if ((barrierX[score % barrierX.length] <= -0.7) && (score < (vocab.length - 1))) {
               score++;
               engWord = vocab[score][0];
               spnWord1 = vocab[score][1];
               spnWord2 = vocab[score][2];
               corWord = vocab[score][3];
           }
+        if ((barrierX[score % barrierX.length] <= -0.7) && (score == (vocab.length - 1))) {
+          score++;
+
+        }
       });
       if (birdIsDead()) {
         timer.cancel();
@@ -99,9 +103,15 @@ class _FlappyBirdState extends State<FlappyBird> {
     }
     return false;
   }
+  bool wonTheGame() {
+    if (score == vocab.length) {
+      return true;
+    }
+    return false;
+  }
 
   bool birdIsDead() {
-    if ((((birdY <= -1.75) || (birdY >= 1))) || ((!topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY <= -0.35)) || ((topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY >= -0.35))) {
+    if ((wonTheGame()) || (((birdY <= -1.75) || (birdY >= 1))) || ((!topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY <= -0.25)) || ((topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY >= -0.25))) {
       return true;
     }
     return false;
@@ -113,10 +123,11 @@ class _FlappyBirdState extends State<FlappyBird> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            backgroundColor: Colors.brown,
+            alignment: Alignment.center,
+            backgroundColor: wonTheGame() ? Colors.orange: Colors.brown,
             title: Center(
               child: Text(
-                "G A M E  O V E R",
+                wonTheGame() ? "C O N G R A T S" : "G A M E  O V E R",
                 style: TextStyle(color: Colors.white,),
               ),
             ),
