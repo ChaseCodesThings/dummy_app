@@ -33,7 +33,9 @@ class _FlappyBirdState extends State<FlappyBird> {
     ['red', 'azul', 'rojo', 'rojo'],//bottom
     ['blue', 'azul', 'rojo', 'azul'],//top
     ['hot', 'frio', 'caliente', 'caliente'],//bottom
-    ['cold', 'frio', 'caliente', 'frio']//top
+    ['cold', 'frio', 'caliente', 'frio'],//top
+    ['water', 'fuego', 'aqua', 'aqua'],//bottom
+    //['fire', 'aqua', 'fuego', 'fuego']//bottom
   ];
   String engWord = vocab[0][0];
   String spnWord1 = vocab[0][1];
@@ -66,14 +68,11 @@ class _FlappyBirdState extends State<FlappyBird> {
           }
         if ((barrierX[score % barrierX.length] <= -0.7) && (score == (vocab.length - 1))) {
           score++;
-
         }
       });
       if (birdIsDead()) {
         timer.cancel();
         gameHasStarted = false;
-        print(birdY);
-        print(barrierX.length);
         _showDialog();
       }
     });

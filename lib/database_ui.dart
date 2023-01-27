@@ -66,17 +66,6 @@ class _DataState extends State<Data>{
             ),
             TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-              ),
-              onPressed: () async{
-                List<Map<String,dynamic>> queryRows = await DatabaseHelper.instance.queryAll();
-                print(queryRows);
-              },
-              child: Text("Show all Accounts"),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
                 backgroundColor: Colors.grey,
                 foregroundColor: Colors.white,
               ),
@@ -86,6 +75,18 @@ class _DataState extends State<Data>{
               },
               child: Text("Delete Account"),
             ),
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () async{
+                List<Map<String,dynamic>> queryRows = await DatabaseHelper.instance.queryAll();
+                print(queryRows);
+              },
+              child: Text("Show all Accounts"),
+            ),
+            //DropdownButton(items: , onChanged: ),
           ],
         ),
       ),
