@@ -168,19 +168,19 @@ class _PongState extends State<Pong>{
   }
 
   void moveLeft() {
-    setState(() {
-      if (!(playerX - 0.1 <= -1)) {
+    /*setState(() {
+      if ((!(playerX - 0.1 <= -1)) && (!(playerX + 0.1 >= 0.7))) {
         playerX -= 0.1;
       }
-    });
+    });*/
   }
 
   void moveRight() {
-    setState(() {
+    /*setState(() {
       if (!(playerX + 0.1 >= 0.7)) {
         playerX += 0.1;
       }
-    });
+    });*/
   }
 
   @override
@@ -241,13 +241,18 @@ class _PongState extends State<Pong>{
       child: GestureDetector(
         onHorizontalDragStart: (DragStartDetails details)
         {
-          print(details);
+          startGame();
         },
         onHorizontalDragUpdate: (DragUpdateDetails details)
         {
-          print(details);
+          print(details.delta.dx);
+          setState(() {
+            if ((!(playerX - 0.1 <= -1.1)) && (!(playerX + 0.1 >= 1))) {
+              playerX += (details.delta.dx)/200;
+            }
+          });
         },
-        onTap: startGame,
+        //onTap: startGame,
         child: Scaffold(
           backgroundColor: Colors.grey[800],
           body: Center(

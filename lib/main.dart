@@ -72,6 +72,7 @@ class _MyAppState extends State<MyApp> {
           onItemSelected: (index){
             setState(() {
               pageController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeInOutCirc);
+              //physics: const NeverScrollableScrollPhysics()
             });
           },
           items: <BottomNavyBarItem>[
