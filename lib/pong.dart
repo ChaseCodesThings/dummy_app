@@ -185,7 +185,7 @@ class _PongState extends State<Pong>{
 
   @override
   Widget build(BuildContext context) {
-    return RawKeyboardListener(
+    /*return RawKeyboardListener(
       focusNode: FocusNode(),
       autofocus: true,
       onKey: (event) {
@@ -227,6 +227,56 @@ class _PongState extends State<Pong>{
                     y: 0.9,
                     brickWidth: brickWidth,
                     thisIsEnemy: false,
+                ),
+
+                //ball
+                Ball(x: ballX, y: ballY),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );*/
+    return GestureDetector(
+      child: GestureDetector(
+        onHorizontalDragStart: (DragStartDetails details)
+        {
+          print(details);
+        },
+        onHorizontalDragUpdate: (DragUpdateDetails details)
+        {
+          print(details);
+        },
+        onTap: startGame,
+        child: Scaffold(
+          backgroundColor: Colors.grey[800],
+          body: Center(
+            child: Stack(
+              children: [
+                //tap to play
+                CoverScreen(gameStarted: gameStarted,),
+
+                //score screen
+                ScoreScreen(
+                  gameStarted: gameStarted,
+                  enemyScore: enemyScore.round(),
+                  playerScore: playerScore.round(),
+                ),
+
+                //top brick
+                Brick(
+                  x: enemyX,
+                  y: -0.9,
+                  brickWidth: brickWidth,
+                  thisIsEnemy: true,
+                ),
+
+                //bottom brick
+                Brick(
+                  x: playerX,
+                  y: 0.9,
+                  brickWidth: brickWidth,
+                  thisIsEnemy: false,
                 ),
 
                 //ball
