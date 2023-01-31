@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:translator/translator.dart';
+import 'mytts.dart';
 // add speaker icon to translation
 class Vocab extends StatefulWidget {
   @override
   _VocabState createState() => _VocabState();
 }
 class _VocabState extends State<Vocab>{
+  Text2Speech tts = Text2Speech();
   List<String> vocab = ['Dog', 'Cat', 'Water', 'Fire'];
   int position = 0;
   List<String> picture = ['assets/dog.png', 'assets/cat.png', 'assets/water.png', 'assets/fire.png'];
@@ -60,6 +62,20 @@ class _VocabState extends State<Vocab>{
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 35,
+                ),
+              ),
+              SizedBox(
+                height: 50,
+                width: 300,
+                child: ElevatedButton(
+                  onPressed: () {
+                    tts.sayit(out);
+                  },
+                  child: Text("Say in Spanish",
+                    style: TextStyle(
+                      fontSize: 27,
+                    ),
+                  ),
                 ),
               ),
               SizedBox(

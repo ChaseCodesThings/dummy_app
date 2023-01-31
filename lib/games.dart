@@ -34,11 +34,11 @@ class _GamesState extends State<Games> {
             children: [
               Container(
                   color: Colors.white,
-                  child: Pong()
+                  child: FlappyBird()
               ),
               Container(
                   color: Colors.white,
-                  child: FlappyBird()
+                  child: Pong()
               ),
             ],
           ),
@@ -50,8 +50,8 @@ class _GamesState extends State<Games> {
             });
           },
           items: <BottomNavyBarItem>[
+            BottomNavyBarItem(icon: Icon(Icons.garage_outlined), title: Text("Flappy Bird")),
             BottomNavyBarItem(icon: Icon(Icons.gamepad_outlined), title: Text("Pong")),
-            BottomNavyBarItem(icon: Icon(Icons.garage_outlined), title: Text("Snake")),
 
           ],
         ),
