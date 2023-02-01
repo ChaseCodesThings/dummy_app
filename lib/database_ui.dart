@@ -9,6 +9,7 @@ class Data extends StatefulWidget {
 class _DataState extends State<Data>{
   final val = TextEditingController();
   final val2 = TextEditingController();
+  String out = '';
   @override
   Widget build(BuildContext) {
     return Scaffold(
@@ -37,7 +38,12 @@ class _DataState extends State<Data>{
                 ),
                 controller: val2
             ),
-
+            Text(out,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.red,
@@ -82,7 +88,8 @@ class _DataState extends State<Data>{
               ),
               onPressed: () async{
                 List<Map<String,dynamic>> queryRows = await DatabaseHelper.instance.queryAll();
-                print(queryRows);
+                out = queryRows.toString();
+                print(out);
               },
               child: Text("Show all Accounts"),
             ),

@@ -48,7 +48,7 @@ class DatabaseHelper{
 
   Future<List<Map<String,dynamic>>> queryAll() async{
     Database? db = await instance.database;
-    return await db!.rawQuery('SELECT ' + columnName + ' FROM ' + _tableName + ' ORDER BY ' + columnName + 'DESC');
+    return await db!.rawQuery('SELECT ' + columnName + ' FROM ' + _tableName + ' ORDER BY ' + columnName + ' DESC');
   }
 
   Future<List<Map<String,dynamic>>> setDefault(Map<String,dynamic> row) async{

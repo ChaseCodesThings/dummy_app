@@ -25,6 +25,7 @@ class _GamesState extends State<Games> {
     return Scaffold(
         body: Container(
           child: PageView(
+            //physics: const NeverScrollableScrollPhysics(),
             controller: pageController,
             onPageChanged: (index){
               setState(() {

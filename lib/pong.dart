@@ -62,10 +62,10 @@ class _PongState extends State<Pong>{
   void moveEnemy() {
     setState(() {
       if (ballXDirection == direction.LEFT) {
-        enemyX -= 0.0035;
+        enemyX -= 0.0045;
       }
       else if (ballXDirection == direction.RIGHT) {
-        enemyX += 0.0035;
+        enemyX += 0.0045;
       }
     });
   }
@@ -111,6 +111,8 @@ class _PongState extends State<Pong>{
       ballY = 0;
       playerX = 0;
       enemyX = 0;
+      ballYDirection = direction.DOWN;
+      ballXDirection = direction.LEFT;
     });
   }
 
@@ -185,58 +187,6 @@ class _PongState extends State<Pong>{
 
   @override
   Widget build(BuildContext context) {
-    /*return RawKeyboardListener(
-      focusNode: FocusNode(),
-      autofocus: true,
-      onKey: (event) {
-        if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
-          moveLeft();
-        }
-        else if (event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
-          moveRight();
-        }
-      },
-      child: GestureDetector(
-        onTap: startGame,
-        child: Scaffold(
-          backgroundColor: Colors.grey[800],
-          body: Center(
-            child: Stack(
-              children: [
-                //tap to play
-                CoverScreen(gameStarted: gameStarted,),
-
-                //score screen
-                ScoreScreen(
-                  gameStarted: gameStarted,
-                  enemyScore: enemyScore.round(),
-                  playerScore: playerScore.round(),
-                ),
-
-                //top brick
-                Brick(
-                    x: enemyX,
-                    y: -0.9,
-                    brickWidth: brickWidth,
-                    thisIsEnemy: true,
-                ),
-
-                //bottom brick
-                Brick(
-                    x: playerX,
-                    y: 0.9,
-                    brickWidth: brickWidth,
-                    thisIsEnemy: false,
-                ),
-
-                //ball
-                Ball(x: ballX, y: ballY),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );*/
     return GestureDetector(
       child: GestureDetector(
         onHorizontalDragStart: (DragStartDetails details)
@@ -247,7 +197,7 @@ class _PongState extends State<Pong>{
         {
           print(details.delta.dx);
           setState(() {
-            if ((!(playerX - 0.1 <= -1.1)) && (!(playerX + 0.1 >= 1))) {
+            if ((!(playerX - 0.1 <= -1.1)) && (!(playerX + 0.1 >= 0.7))) {
               playerX += (details.delta.dx)/200;
             }
           });
