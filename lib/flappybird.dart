@@ -19,7 +19,7 @@ class _FlappyBirdState extends State<FlappyBird> {
   double initialPosition = birdY;
   double height = 0;
   double time = 0;
-  double gravity = -4.5;
+  double gravity = -3.5;
   double velocity = 2.9;
 
   //game settings
@@ -38,11 +38,12 @@ class _FlappyBirdState extends State<FlappyBird> {
     //['fire', 'aqua', 'fuego', 'fuego']//bottom
   ];
   String engWord = vocab[0][0];
+
   String spnWord1 = vocab[0][1];
   String spnWord2 = vocab[0][2];
   String corWord = vocab[0][3];
   static double barrierWidth = 0.5;
-  static double barrierHeight = 0.742;
+  //static double barrierHeight = MediaQuery.of(context).size.width/554;
 
 
 
@@ -74,6 +75,8 @@ class _FlappyBirdState extends State<FlappyBird> {
         timer.cancel();
         gameHasStarted = false;
         _showDialog();
+        print(MediaQuery.of(context).size.width);
+        print(MediaQuery.of(context).size.height);
       }
     });
   }
@@ -110,7 +113,7 @@ class _FlappyBirdState extends State<FlappyBird> {
   }
 
   bool birdIsDead() {
-    if ((wonTheGame()) || (((birdY <= -1.75) || (birdY >= 1))) || ((!topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY <= -0.25)) || ((topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY >= -0.25))) {
+    if ((wonTheGame()) || (((birdY <= (MediaQuery.of(context).size.width/-235.1)) || (birdY >= (MediaQuery.of(context).size.width/411.43)))) || ((!topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY <= (MediaQuery.of(context).size.width/-1150))) || ((topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY >= (MediaQuery.of(context).size.width/-1150)))) {
       return true;
     }
     return false;
@@ -189,7 +192,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[0],
                           barrierWidth: barrierWidth,
-                          barrierHeight: barrierHeight,
+                          barrierHeight: MediaQuery.of(context).size.width/555,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
                         ),
@@ -197,7 +200,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[0],
                           barrierWidth: barrierWidth,
-                          barrierHeight: barrierHeight,
+                          barrierHeight: MediaQuery.of(context).size.width/555,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),
@@ -205,7 +208,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[1],
                           barrierWidth: barrierWidth,
-                          barrierHeight: barrierHeight,
+                          barrierHeight: MediaQuery.of(context).size.width/555,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
                         ),
@@ -213,7 +216,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[1],
                           barrierWidth: barrierWidth,
-                          barrierHeight: barrierHeight,
+                          barrierHeight: MediaQuery.of(context).size.width/555,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),

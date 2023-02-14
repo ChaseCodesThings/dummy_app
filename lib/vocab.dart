@@ -46,7 +46,7 @@ class _VocabState extends State<Vocab>{
                 child: ElevatedButton(
                     child: Text("Translate to Spanish",
                     style: TextStyle(
-                      fontSize: 28,
+                      fontSize: MediaQuery.of(context).size.width/15,
                     ),
                   ),
                   onPressed: () {
@@ -61,7 +61,7 @@ class _VocabState extends State<Vocab>{
               Text(out,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 35,
+                  fontSize: MediaQuery.of(context).size.width/11,
                 ),
               ),
               SizedBox(
@@ -73,7 +73,7 @@ class _VocabState extends State<Vocab>{
                   },
                   child: Text("Say in Spanish",
                     style: TextStyle(
-                      fontSize: 27,
+                      fontSize: MediaQuery.of(context).size.width/15,
                     ),
                   ),
                 ),
@@ -84,7 +84,7 @@ class _VocabState extends State<Vocab>{
                 child: ElevatedButton(
                   child: Text("Next Word",
                     style: TextStyle(
-                      fontSize: 28,
+                      fontSize: MediaQuery.of(context).size.width/15,
                     ),
                   ),
                   onPressed: () {
@@ -103,7 +103,7 @@ class _VocabState extends State<Vocab>{
                 child: ElevatedButton(
                   child: Text("Previous Word",
                     style: TextStyle(
-                      fontSize: 28,
+                      fontSize: MediaQuery.of(context).size.width/15,
                     ),
                   ),
                   onPressed: () {
