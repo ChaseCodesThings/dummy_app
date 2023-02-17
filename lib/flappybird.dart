@@ -113,7 +113,7 @@ class _FlappyBirdState extends State<FlappyBird> {
   }
 
   bool birdIsDead() {
-    if ((wonTheGame()) || (((birdY <= (MediaQuery.of(context).size.width/-235.1)) || (birdY >= (MediaQuery.of(context).size.width/411.43)))) || ((!topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY <= (MediaQuery.of(context).size.width/-1150))) || ((topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY >= (MediaQuery.of(context).size.width/-1150)))) {
+    if ((wonTheGame()) || (((birdY <= (MediaQuery.of(context).size.height/-235.1)) || (birdY >= (MediaQuery.of(context).size.width/411.43)))) || ((!topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY <= (MediaQuery.of(context).size.width/-1150))) || ((topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + barrierWidth >= -birdWidth) && (birdY >= (MediaQuery.of(context).size.width/-1150)))) {
       return true;
     }
     return false;
@@ -192,7 +192,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[0],
                           barrierWidth: barrierWidth,
-                          barrierHeight: MediaQuery.of(context).size.width/555,
+                          barrierHeight: MediaQuery.of(context).size.height/1168,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
                         ),
@@ -200,7 +200,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[0],
                           barrierWidth: barrierWidth,
-                          barrierHeight: MediaQuery.of(context).size.width/555,
+                          barrierHeight: MediaQuery.of(context).size.height/1168,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),
@@ -208,7 +208,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[1],
                           barrierWidth: barrierWidth,
-                          barrierHeight: MediaQuery.of(context).size.width/555,
+                          barrierHeight: MediaQuery.of(context).size.height/1168,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
                         ),
@@ -216,7 +216,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[1],
                           barrierWidth: barrierWidth,
-                          barrierHeight: MediaQuery.of(context).size.width/555,
+                          barrierHeight: MediaQuery.of(context).size.height/1168,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),
@@ -226,34 +226,37 @@ class _FlappyBirdState extends State<FlappyBird> {
                 )
             ),
             Container(
-              height: 15,
+              height: MediaQuery.of(context).size.height/57.8,
               color: Colors.green,
             ),
-            Expanded(
-                child: Container(
-                  color: Colors.brown,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('English Word', style: TextStyle(color: Colors.white, fontSize: 30)),
-                          SizedBox(height: 20),
-                          Text(engWord, style: TextStyle(color: Colors.white, fontSize: 30)),
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('SCORE', style: TextStyle(color: Colors.white, fontSize: 30)),
-                          SizedBox(height: 20),
-                          Text('${score}', style: TextStyle(color: Colors.white, fontSize: 30)),
-                        ],
-                      ),
-                  ],
-                  ),
-                )
+            SizedBox(
+              height: MediaQuery.of(context).size.height/5.38,
+              child: Expanded(
+                  child: Container(
+                    color: Colors.brown,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('English Word', style: TextStyle(color: Colors.white, fontSize: 30)),
+                            SizedBox(height: MediaQuery.of(context).size.height/40.5),
+                            Text(engWord, style: TextStyle(color: Colors.white, fontSize: 30)),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('SCORE', style: TextStyle(color: Colors.white, fontSize: 30)),
+                            SizedBox(height: MediaQuery.of(context).size.height/40.5),
+                            Text('${score}', style: TextStyle(color: Colors.white, fontSize: 30)),
+                          ],
+                        ),
+                    ],
+                    ),
+                  )
+              ),
             ),
           ],
         ),
