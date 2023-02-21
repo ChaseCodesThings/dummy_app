@@ -231,7 +231,6 @@ class _FlappyBirdState extends State<FlappyBird> {
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height/5.38,
-              child: Expanded(
                   child: Container(
                     color: Colors.brown,
                     child: Row(
@@ -256,7 +255,6 @@ class _FlappyBirdState extends State<FlappyBird> {
                     ],
                     ),
                   )
-              ),
             ),
           ],
         ),

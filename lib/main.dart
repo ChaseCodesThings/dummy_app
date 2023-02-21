@@ -6,14 +6,26 @@ import 'package:dummy_app/database_ui.dart';
 import 'games.dart';
 
 void main(){
-  runApp(MyApp());
+  runApp(Home());
 }
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyApp(),
+    );
+  }
+}
+
 class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 }
 class _MyAppState extends State<MyApp> {
   int currentIndex = 0;
+  double barHeight = 0;
   late PageController pageController;
   @override
   void initState(){
@@ -27,62 +39,60 @@ class _MyAppState extends State<MyApp> {
   }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(title: Text("Vernacular Prototype")),
-        body: SizedBox.expand(
-          child: PageView(
-            controller: pageController,
-            onPageChanged: (index){
-              setState(() {
-                currentIndex = index;
-              });
-            },
-            children: [
-              Container(
-                 padding: const EdgeInsets.all(45),
-                 alignment: Alignment.center,
-                  color: Colors.blue,
-                child: const Text("Welcome to my App Prototype",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 35),
-                )
+    return Scaffold(
+            appBar: AppBar(title: Text("Vernacular Prototype")),
+            body: SizedBox.expand(
+              child: PageView(
+                controller: pageController,
+                onPageChanged: (index){
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
+                children: [
+                  Container(
+                      padding: const EdgeInsets.all(45),
+                      alignment: Alignment.center,
+                      color: Colors.blue,
+                      child: const Text("Welcome to my App Prototype",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 35),
+                      )
+                  ),
+                  Container(
+                      color: Colors.white,
+                      child: Vocab()
+                  ),
+                  Container(
+                      color: Colors.purple,
+                      child: Games()
+                  ),
+                  Container(
+                      color: Colors.amber,
+                      child: Translate()
+                  ),
+                  Container(
+                      color: Colors.blueGrey,
+                      child: Data()
+                  ),
+                ],
               ),
-              Container(
-                color: Colors.white,
-                child: Vocab()
-              ),
-              Container(
-                  color: Colors.purple,
-                  child: Games()
-              ),
-              Container(
-                  color: Colors.amber,
-                  child: Translate()
-              ),
-              Container(
-                  color: Colors.blueGrey,
-                  child: Data()
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: BottomNavyBar(
-          onItemSelected: (index){
-            setState(() {
-              pageController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeInOutCirc);
-            });
-          },
-          items: <BottomNavyBarItem>[
-            BottomNavyBarItem(icon: Icon(Icons.home), title: Text("Home")),
-            BottomNavyBarItem(icon: Icon(Icons.workspace_premium_outlined), title: Text("VocabUlary")),
-            BottomNavyBarItem(icon: Icon(Icons.gamepad), title: Text("Games")),
-            BottomNavyBarItem(icon: Icon(Icons.language), title: Text("Translation")),
-            BottomNavyBarItem(icon: Icon(Icons.person_outline), title: Text("Database")),
-          ],
-        ),
-      ),
-    );
+            ),
+            bottomNavigationBar: BottomNavyBar(
+              containerHeight: MediaQuery.of(context).size.height/15.7,
+              onItemSelected: (index){
+                setState(() {
+                  pageController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeInOutCirc);
+                });
+              },
+              items: <BottomNavyBarItem>[
+                BottomNavyBarItem(icon: Icon(Icons.home), title: Text("Home")),
+                BottomNavyBarItem(icon: Icon(Icons.workspace_premium_outlined), title: Text("VocabUlary")),
+                BottomNavyBarItem(icon: Icon(Icons.gamepad), title: Text("Games")),
+                BottomNavyBarItem(icon: Icon(Icons.language), title: Text("Translation")),
+                BottomNavyBarItem(icon: Icon(Icons.person_outline), title: Text("Database")),
+              ],
+            ),
+          );
   }
 }
