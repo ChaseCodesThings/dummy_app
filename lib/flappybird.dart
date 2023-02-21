@@ -192,7 +192,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[0],
                           barrierWidth: barrierWidth,
-                          barrierHeight: MediaQuery.of(context).size.height/1168,
+                          barrierHeight: MediaQuery.of(context).size.height/1162,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
                         ),
@@ -200,7 +200,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[0],
                           barrierWidth: barrierWidth,
-                          barrierHeight: MediaQuery.of(context).size.height/1168,
+                          barrierHeight: MediaQuery.of(context).size.height/1162,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),
@@ -208,7 +208,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[1],
                           barrierWidth: barrierWidth,
-                          barrierHeight: MediaQuery.of(context).size.height/1168,
+                          barrierHeight: MediaQuery.of(context).size.height/1162,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
                         ),
@@ -216,7 +216,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[1],
                           barrierWidth: barrierWidth,
-                          barrierHeight: MediaQuery.of(context).size.height/1168,
+                          barrierHeight: MediaQuery.of(context).size.height/1162,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),
