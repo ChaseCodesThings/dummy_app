@@ -23,7 +23,7 @@ class MyBarrier extends StatelessWidget {
       child: Container(
         color: isThisBottomBarrier ? Colors.red.withOpacity(0.5) : Colors.blue.withOpacity(0.5),
           width: MediaQuery.of(context).size.width * (barrierWidth / 2),
-          height: MediaQuery.of(context).size.height * 9.123/10 * barrierHeight / 2,
+          height: barrierHeight,
         child: Container(
           alignment: Alignment.center,
           child: Text(
