@@ -188,11 +188,12 @@ class _FlappyBirdState extends State<FlappyBird> {
                           ),
                         ),
 
+                        //To Do
                         //top barrier 1
                         MyBarrier(
                           barrierX: barrierX[0],
                           barrierWidth: barrierWidth,
-                          barrierHeight: MediaQuery.of(context).size.height/3.63,
+                          barrierHeight: MediaQuery.of(context).size.height/3.578,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
                         ),
@@ -200,7 +201,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[0],
                           barrierWidth: barrierWidth,
-                          barrierHeight: MediaQuery.of(context).size.height/3.63,
+                          barrierHeight: MediaQuery.of(context).size.height/3.578,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),
@@ -208,7 +209,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[1],
                           barrierWidth: barrierWidth,
-                          barrierHeight: MediaQuery.of(context).size.height/1162,
+                          barrierHeight: MediaQuery.of(context).size.height/3.578,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
                         ),
@@ -216,7 +217,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                         MyBarrier(
                           barrierX: barrierX[1],
                           barrierWidth: barrierWidth,
-                          barrierHeight: MediaQuery.of(context).size.height/1162,
+                          barrierHeight: MediaQuery.of(context).size.height/3.578,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),
