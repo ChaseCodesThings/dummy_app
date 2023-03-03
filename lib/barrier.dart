@@ -28,7 +28,7 @@ class MyBarrier extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             barrierText,
-            style: TextStyle(color: Colors.white, fontSize: 25),
+            style: TextStyle(color: Colors.white, fontSize: MediaQuery.of(context).size.width/17),
           ),
         ),
       ),
