@@ -79,10 +79,11 @@ class _FlappyBirdState extends State<FlappyBird> {
         _showDialog();
         print(MediaQuery.of(context).size.width);
         print(MediaQuery.of(context).size.height);
-      }
-      if (wonTheGame()) {
         _controller.play();
       }
+      /*if (wonTheGame()) {
+        _controller.play();
+      }*/
     });
   }
 
@@ -160,7 +161,11 @@ class _FlappyBirdState extends State<FlappyBird> {
               Align(
                 alignment: Alignment.topCenter,
                 child: ConfettiWidget(confettiController: _controller,
-                  blastDirection: pi/2,),
+                  blastDirection: pi / 2,
+                  emissionFrequency: 0.05,
+                  numberOfParticles: 10,
+                  maxBlastForce: 10,
+                  gravity: 0.1,),
               ),
             ],
           );
