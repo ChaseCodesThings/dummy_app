@@ -2,6 +2,8 @@ import 'package:dummy_app/barrier.dart';
 import 'package:dummy_app/bird.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:confetti/confetti.dart';
+import 'dart:math';
 
 class FlappyBird extends StatefulWidget {
 
@@ -78,6 +80,9 @@ class _FlappyBirdState extends State<FlappyBird> {
         print(MediaQuery.of(context).size.width);
         print(MediaQuery.of(context).size.height);
       }
+      if (wonTheGame()) {
+        _controller.play();
+      }
     });
   }
 
@@ -124,7 +129,9 @@ class _FlappyBirdState extends State<FlappyBird> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return AlertDialog(
+          return Stack(
+            children: [
+            AlertDialog(
             alignment: Alignment.center,
             backgroundColor: wonTheGame() ? Colors.orange: Colors.brown,
             title: Center(
@@ -149,7 +156,12 @@ class _FlappyBirdState extends State<FlappyBird> {
                 ),
               )
             ],
+          ),
+              ConfettiWidget(confettiController: _controller,
+                blastDirection: pi,),
+            ],
           );
+
         });
   }
 
@@ -160,8 +172,14 @@ class _FlappyBirdState extends State<FlappyBird> {
     });
   }
 
+  final _controller = ConfettiController();
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: gameHasStarted ? jump : startGame,
