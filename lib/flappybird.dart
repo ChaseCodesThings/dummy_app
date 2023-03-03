@@ -37,7 +37,7 @@ class _FlappyBirdState extends State<FlappyBird> {
     ['hot', 'frio', 'caliente', 'caliente'],//bottom
     ['cold', 'frio', 'caliente', 'frio'],//top
     ['water', 'fuego', 'aqua', 'aqua'],//bottom
-    //['fire', 'aqua', 'fuego', 'fuego']//bottom
+    ['fire', 'aqua', 'fuego', 'fuego']//bottom
   ];
   String engWord = vocab[0][0];
 
@@ -157,8 +157,11 @@ class _FlappyBirdState extends State<FlappyBird> {
               )
             ],
           ),
-              ConfettiWidget(confettiController: _controller,
-                blastDirection: pi,),
+              Align(
+                alignment: Alignment.topCenter,
+                child: ConfettiWidget(confettiController: _controller,
+                  blastDirection: pi/2,),
+              ),
             ],
           );
 
