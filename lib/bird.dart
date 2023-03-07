@@ -1,7 +1,7 @@
+import 'package:dummy_app/SizeConfig.dart';
 import 'package:flutter/material.dart';
 
 class MyBird extends StatelessWidget {
-
   final birdY;
   final double birdWidth;
   final double birdHeight;
@@ -10,11 +10,13 @@ class MyBird extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Container(
       alignment: Alignment(0, birdY),
-      child: Image.asset('assets/flappybird.png',
-        width: MediaQuery.of(context).size.width/8.23,
-        height: MediaQuery.of(context).size.height/17.35,
+      child: Image.asset(
+        'assets/flappybird.png',
+        width: SizeConfig.safeBlockVertical * 8,
+        height: SizeConfig.safeBlockVertical * 8,
         fit: BoxFit.fill,
       ),
     );
