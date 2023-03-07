@@ -11,10 +11,10 @@ class MyBird extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment(0, ((2 * birdY + birdHeight) / (2 - birdHeight)) + 0.5),
+      alignment: Alignment(0, birdY),
       child: Image.asset('assets/flappybird.png',
-        width: 150,
-        height: 150,
+        width: MediaQuery.of(context).size.width/8.23,
+        height: MediaQuery.of(context).size.height/17.35,
         fit: BoxFit.fill,
       ),
     );

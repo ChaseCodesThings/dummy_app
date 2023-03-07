@@ -40,7 +40,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            appBar: AppBar(title: Text("Vernacular Prototype")),
+            appBar: PreferredSize(
+                preferredSize: Size.fromHeight(MediaQuery.of(context).size.height/15.5),
+                child: AppBar(
+                    title: Text("Vernacular Prototype")
+                )
+            ),
             body: SizedBox.expand(
               child: PageView(
                 controller: pageController,

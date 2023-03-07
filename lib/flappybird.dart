@@ -78,11 +78,7 @@ class _FlappyBirdState extends State<FlappyBird> {
         _showDialog();
         print(MediaQuery.of(context).size.width);
         print(MediaQuery.of(context).size.height);
-        _controller.play();
       }
-      /*if (wonTheGame()) {
-        _controller.play();
-      }*/
     });
   }
 
@@ -118,7 +114,7 @@ class _FlappyBirdState extends State<FlappyBird> {
   }
 
   bool birdIsDead() {
-    if ((wonTheGame()) || (((birdY <= (MediaQuery.of(context).size.height/-235.1)) || (birdY >= (MediaQuery.of(context).size.width/411.43)))) || ((!topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + (MediaQuery.of(context).size.width/822) >= -birdWidth) && (birdY <= (MediaQuery.of(context).size.width/-1150))) || ((topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + (MediaQuery.of(context).size.width/822) >= -birdWidth) && (birdY >= (MediaQuery.of(context).size.width/-1150)))) {
+    if ((wonTheGame()) || (((birdY <= -1) || (birdY >= 1))) || ((!topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + (MediaQuery.of(context).size.width/822) >= -birdWidth) && (birdY <= 0.5)) || ((topRightWord()) && (barrierX[score % barrierX.length] <= birdWidth && barrierX[score % barrierX.length] + (MediaQuery.of(context).size.width/822) >= -birdWidth) && (birdY >= 0.5))) {
       return true;
     }
     return false;
@@ -217,32 +213,24 @@ class _FlappyBirdState extends State<FlappyBird> {
                         //top barrier 1
                         MyBarrier(
                           barrierX: barrierX[0],
-                          barrierWidth: MediaQuery.of(context).size.width/822,
-                          barrierHeight: MediaQuery.of(context).size.height/3.578,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
                         ),
                         //bottom barrier 1
                         MyBarrier(
                           barrierX: barrierX[0],
-                          barrierWidth: MediaQuery.of(context).size.width/822,
-                          barrierHeight: MediaQuery.of(context).size.height/3.578,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),
                         //top barrier 2
                         MyBarrier(
                           barrierX: barrierX[1],
-                          barrierWidth: MediaQuery.of(context).size.width/822,
-                          barrierHeight: MediaQuery.of(context).size.height/3.578,
                           barrierText: spnWord1,
                           isThisBottomBarrier: false,
                         ),
                         //bottom barrier 2
                         MyBarrier(
                           barrierX: barrierX[1],
-                          barrierWidth: MediaQuery.of(context).size.width/822,
-                          barrierHeight: MediaQuery.of(context).size.height/3.578,
                           barrierText: spnWord2,
                           isThisBottomBarrier: true,
                         ),

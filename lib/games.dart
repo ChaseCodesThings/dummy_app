@@ -45,7 +45,7 @@ class _GamesState extends State<Games> {
           ),
         ),
         bottomNavigationBar: BottomNavyBar(
-          containerHeight: MediaQuery.of(context).size.height/15.7,
+          containerHeight: MediaQuery.of(context).size.height/15.5,
           onItemSelected: (index){
             setState(() {
               pageController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeInOutCirc);
