@@ -117,7 +117,7 @@ class _FlappyBirdState extends State<FlappyBird> {
 
   bool birdIsDead() {
     if ((wonTheGame()) ||
-        // (((birdY <= -1) || (birdY >= 1))) ||
+        (((birdY <= -1) || (birdY >= 1))) ||
         ((!topRightWord()) &&
             (barrierX[score % barrierX.length] <= birdWidth &&
                 barrierX[score % barrierX.length] >= -birdWidth) &&

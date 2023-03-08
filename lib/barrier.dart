@@ -23,7 +23,7 @@ class MyBarrier extends StatelessWidget {
             ? Colors.red.withOpacity(0.5)
             : Colors.blue.withOpacity(0.5),
         width: SizeConfig.safeBlockHorizontal * 25,
-        height: SizeConfig.safeBlockVertical * 33.5,
+        height: SizeConfig.safeBlockVertical * 33,
         child: Container(
           alignment: Alignment.center,
           child: Text(
