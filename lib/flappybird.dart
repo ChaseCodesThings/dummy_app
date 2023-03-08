@@ -29,7 +29,7 @@ class _FlappyBirdState extends State<FlappyBird> {
   bool gameHasStarted = false;
   int score = 0;
   //barrier variables
-  static List<double> barrierX = [1, 4];
+  static List<double> barrierX = [1.1, 4.1];
   static List<List<String>> vocab = [
     ['dog', 'perro', 'gato', 'perro'], //top
     ['cat', 'perro', 'gato', 'gato'], //bottom
@@ -110,6 +110,7 @@ class _FlappyBirdState extends State<FlappyBird> {
 
   bool wonTheGame() {
     if (score == vocab.length) {
+      _controller.play();
       return true;
     }
     return false;
@@ -126,7 +127,6 @@ class _FlappyBirdState extends State<FlappyBird> {
             (barrierX[score % barrierX.length] <= birdWidth &&
                 barrierX[score % barrierX.length] >= -birdWidth) &&
             (birdY > 0.0))) {
-      _controller.play();
       return true;
     }
     return false;
@@ -221,7 +221,7 @@ class _FlappyBirdState extends State<FlappyBird> {
                             gameHasStarted ? '' : 'T A P  T O  P L A Y',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: SizeConfig.safeBlockVertical * 3),
+                                fontSize: SizeConfig.safeBlockVertical * 2.6),
                           ),
                         ),
 

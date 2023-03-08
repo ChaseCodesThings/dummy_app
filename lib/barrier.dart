@@ -22,8 +22,8 @@ class MyBarrier extends StatelessWidget {
         color: isThisBottomBarrier
             ? Colors.red.withOpacity(0.5)
             : Colors.blue.withOpacity(0.5),
-        width: SizeConfig.safeBlockHorizontal * 25,
-        height: SizeConfig.safeBlockVertical * 33,
+        width: SizeConfig.safeBlockHorizontal * 27,
+        height: SizeConfig.safeBlockVertical * 32.245,
         child: Container(
           alignment: Alignment.center,
           child: Text(

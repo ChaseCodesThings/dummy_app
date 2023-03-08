@@ -15,8 +15,8 @@ class MyBird extends StatelessWidget {
       alignment: Alignment(0, birdY),
       child: Image.asset(
         'assets/flappybird.png',
-        width: SizeConfig.safeBlockVertical * 8,
-        height: SizeConfig.safeBlockVertical * 8,
+        width: SizeConfig.safeBlockVertical * 6,
+        height: SizeConfig.safeBlockVertical * 6,
         fit: BoxFit.fill,
       ),
     );
