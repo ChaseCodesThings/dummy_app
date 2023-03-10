@@ -17,7 +17,7 @@ enum direction { UP }
 class _FlappyBirdState extends State<FlappyBird> {
   //bird variables
   static double birdY = 0;
-  static double birdWidth = 0.05;
+  static double birdWidth = 0.27/2;
   static double birdHeight = 0.1;
   double initialPosition = birdY;
   double height = 0;
@@ -38,7 +38,8 @@ class _FlappyBirdState extends State<FlappyBird> {
     ['hot', 'frio', 'caliente', 'caliente'], //bottom
     ['cold', 'frio', 'caliente', 'frio'], //top
     ['water', 'fuego', 'aqua', 'aqua'], //top
-    ['fire', 'aqua', 'fuego', 'fuego'] //bottom
+    ['fire', 'aqua', 'fuego', 'fuego'], //bottom
+    []
   ];
   String engWord = vocab[0][0];
 
@@ -56,7 +57,8 @@ class _FlappyBirdState extends State<FlappyBird> {
         birdY = initialPosition - height;
         for (int i = 0; i < barrierX.length; i++) {
           barrierX[i] -= 0.005;
-          if ((barrierX[i] < -1) && (score < vocab.length - 1)) {
+          print(barrierX[i]);
+          if ((barrierX[i] < -1.7) && (score < vocab.length - 1)) {
             barrierX[i] += 6;
           }
         }
@@ -77,8 +79,7 @@ class _FlappyBirdState extends State<FlappyBird> {
         timer.cancel();
         gameHasStarted = false;
         _showDialog();
-        print(MediaQuery.of(context).size.width);
-        print(MediaQuery.of(context).size.height);
+        print(birdY);
       }
     });
   }

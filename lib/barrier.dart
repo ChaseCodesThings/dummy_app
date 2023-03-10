@@ -30,7 +30,7 @@ class MyBarrier extends StatelessWidget {
             barrierText,
             style: TextStyle(
                 color: Colors.white,
-                fontSize: SizeConfig.safeBlockVertical * 4),
+                fontSize: SizeConfig.safeBlockHorizontal * 7),
           ),
         ),
       ),
