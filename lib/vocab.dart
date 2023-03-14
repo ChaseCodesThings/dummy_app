@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:translator/translator.dart';
+import 'SizeConfig.dart';
 import 'mytts.dart';
 // add speaker icon to translation
 class Vocab extends StatefulWidget {
@@ -36,17 +37,17 @@ class _VocabState extends State<Vocab>{
                 ),
               ),
               Container(
-                  height: 200,
-                  width: 350,
+                  height: SizeConfig.safeBlockVertical * 30,
+                  width: SizeConfig.safeBlockHorizontal * 85,
                   child: Image.asset(picture[position])
               ),
               SizedBox(
-                height: 50,
-                width: 300,
+                height: SizeConfig.safeBlockVertical * 6,
+                width: SizeConfig.safeBlockHorizontal * 75,
                 child: ElevatedButton(
                     child: Text("Translate to Spanish",
                     style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width/15,
+                      fontSize: SizeConfig.safeBlockHorizontal * 7,
                     ),
                   ),
                   onPressed: () {
@@ -61,30 +62,30 @@ class _VocabState extends State<Vocab>{
               Text(out,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width/11,
+                  fontSize: SizeConfig.safeBlockHorizontal * 7,
                 ),
               ),
               SizedBox(
-                height: 50,
-                width: 300,
+                height: SizeConfig.safeBlockVertical * 6,
+                width: SizeConfig.safeBlockHorizontal * 75,
                 child: ElevatedButton(
                   onPressed: () {
                     tts.sayit(out);
                   },
                   child: Text("Say in Spanish",
                     style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width/15,
+                      fontSize: SizeConfig.safeBlockHorizontal * 7,
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                height: 50,
-                width: 300,
+                height: SizeConfig.safeBlockVertical * 6,
+                width: SizeConfig.safeBlockHorizontal * 75,
                 child: ElevatedButton(
                   child: Text("Next Word",
                     style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width/15,
+                      fontSize: SizeConfig.safeBlockHorizontal * 7,
                     ),
                   ),
                   onPressed: () {
@@ -98,12 +99,12 @@ class _VocabState extends State<Vocab>{
                 ),
               ),
               SizedBox(
-                  height: 50,
-                  width: 300,
+                height: SizeConfig.safeBlockVertical * 6,
+                width: SizeConfig.safeBlockHorizontal * 75,
                 child: ElevatedButton(
                   child: Text("Previous Word",
                     style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width/15,
+                      fontSize: SizeConfig.safeBlockHorizontal * 7,
                     ),
                   ),
                   onPressed: () {

@@ -62,10 +62,10 @@ class _PongState extends State<Pong>{
   void moveEnemy() {
     setState(() {
       if (ballXDirection == direction.LEFT) {
-        enemyX -= 0.0045;
+        enemyX -= 0.00045;
       }
       else if (ballXDirection == direction.RIGHT) {
-        enemyX += 0.0045;
+        enemyX += 0.00045;
       }
     });
   }
@@ -154,17 +154,17 @@ class _PongState extends State<Pong>{
     //vertical movement
     setState(() {
       if (ballYDirection == direction.DOWN) {
-        ballY += 0.005;
+        ballY += 0.0005;
       }
       else if (ballYDirection == direction.UP) {
-        ballY -= 0.005;
+        ballY -= 0.0005;
       }
       //horizontal movement
       if (ballXDirection == direction.LEFT) {
-        ballX -= 0.005;
+        ballX -= 0.0005;
       }
       else if (ballXDirection == direction.RIGHT) {
-        ballX += 0.005;
+        ballX += 0.0005;
       }
     });
   }
