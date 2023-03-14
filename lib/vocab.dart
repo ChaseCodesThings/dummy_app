@@ -47,7 +47,7 @@ class _VocabState extends State<Vocab>{
                 child: ElevatedButton(
                     child: Text("Translate to Spanish",
                     style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 7,
+                      fontSize: SizeConfig.safeBlockHorizontal * 6,
                     ),
                   ),
                   onPressed: () {
@@ -62,7 +62,7 @@ class _VocabState extends State<Vocab>{
               Text(out,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 7,
+                  fontSize: SizeConfig.safeBlockHorizontal * 6,
                 ),
               ),
               SizedBox(
@@ -74,7 +74,7 @@ class _VocabState extends State<Vocab>{
                   },
                   child: Text("Say in Spanish",
                     style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 7,
+                      fontSize: SizeConfig.safeBlockHorizontal * 6,
                     ),
                   ),
                 ),
@@ -85,7 +85,7 @@ class _VocabState extends State<Vocab>{
                 child: ElevatedButton(
                   child: Text("Next Word",
                     style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 7,
+                      fontSize: SizeConfig.safeBlockHorizontal * 6,
                     ),
                   ),
                   onPressed: () {
@@ -104,7 +104,7 @@ class _VocabState extends State<Vocab>{
                 child: ElevatedButton(
                   child: Text("Previous Word",
                     style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 7,
+                      fontSize: SizeConfig.safeBlockHorizontal * 6,
                     ),
                   ),
                   onPressed: () {
