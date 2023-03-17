@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-
+import 'mytts.dart';
 import 'package:confetti/confetti.dart';
 import 'package:dummy_app/SizeConfig.dart';
 import 'package:dummy_app/barrier.dart';
@@ -22,10 +22,11 @@ class _FlappyBirdState extends State<FlappyBird> {
   double initialPosition = birdY;
   double height = 0;
   double time = 0;
-  double gravity = -3.0;
-  double velocity = 2.5;
+  double gravity = -2.0;
+  double velocity = 1.5;
 
   //game settings
+  Text2Speech tts = Text2Speech();
   bool gameHasStarted = false;
   int score = 0;
   //barrier variables
@@ -39,7 +40,6 @@ class _FlappyBirdState extends State<FlappyBird> {
     ['cold', 'frio', 'caliente', 'frio'], //top
     ['water', 'fuego', 'aqua', 'aqua'], //top
     ['fire', 'aqua', 'fuego', 'fuego'], //bottom
-    []
   ];
   String engWord = vocab[0][0];
 
@@ -66,6 +66,7 @@ class _FlappyBirdState extends State<FlappyBird> {
             (score < (vocab.length - 1))) {
           score++;
           engWord = vocab[score][0];
+          tts.sayit(engWord);
           spnWord1 = vocab[score][1];
           spnWord2 = vocab[score][2];
           corWord = vocab[score][3];
@@ -79,7 +80,6 @@ class _FlappyBirdState extends State<FlappyBird> {
         timer.cancel();
         gameHasStarted = false;
         _showDialog();
-        print(birdY);
       }
     });
   }
@@ -116,6 +116,7 @@ class _FlappyBirdState extends State<FlappyBird> {
     }
     return false;
   }
+
 
   bool birdIsDead() {
     if ((wonTheGame()) ||
