@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:math';
-import 'mytts.dart';
+
 import 'package:confetti/confetti.dart';
 import 'package:dummy_app/SizeConfig.dart';
 import 'package:dummy_app/barrier.dart';
 import 'package:dummy_app/bird.dart';
 import 'package:flutter/material.dart';
+
+import 'mytts.dart';
 
 class FlappyBird extends StatefulWidget {
   @override
@@ -17,7 +19,7 @@ enum direction { UP }
 class _FlappyBirdState extends State<FlappyBird> {
   //bird variables
   static double birdY = 0;
-  static double birdWidth = 0.27/2;
+  static double birdWidth = 0.27 / 2;
   static double birdHeight = 0.1;
   double initialPosition = birdY;
   double height = 0;
@@ -116,7 +118,6 @@ class _FlappyBirdState extends State<FlappyBird> {
     }
     return false;
   }
-
 
   bool birdIsDead() {
     if ((wonTheGame()) ||
